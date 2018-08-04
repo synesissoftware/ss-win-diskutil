@@ -4,7 +4,7 @@
  * Purpose: Synesis Software Disk Utility library, for Windows: Volumes API.
  *
  * Created: 4th April 2019
- * Updated: 2nd August 2019
+ * Updated: 5th August 2019
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
@@ -46,6 +46,7 @@
  * includes
  */
 
+#include <stddef.h>
 #include <stdint.h>
 
 /* /////////////////////////////////////////////////////////////////////////

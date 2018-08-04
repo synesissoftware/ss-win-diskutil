@@ -4,7 +4,7 @@
  * Purpose: Synesis Software Disk Utility library, for Windows: version.
  *
  * Created: 2nd August 2019
- * Updated: 2nd August 2019
+ * Updated: 5th August 2019
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
@@ -70,15 +70,16 @@
 
 #ifndef SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION
 # define SS_WIN_DISKUTIL_VER_0_2_1      0x000201ff
+# define SS_WIN_DISKUTIL_VER_0_2_2      0x000202ff
 
-# define SS_WIN_DISKUTIL_VER            SS_WIN_DISKUTIL_VER_0_2_1
+# define SS_WIN_DISKUTIL_VER            SS_WIN_DISKUTIL_VER_0_2_2
 #else /* ? SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION */
-# define SS_WIN_DISKUTIL_VER            0x000201ff
+# define SS_WIN_DISKUTIL_VER            0x000202ff
 #endif /* !SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION */
 
 #define SS_WIN_DISKUTIL_VER_MAJOR       0
 #define SS_WIN_DISKUTIL_VER_MINOR       2
-#define SS_WIN_DISKUTIL_VER_REVISION    1
+#define SS_WIN_DISKUTIL_VER_REVISION    2
 
 /* /////////////////////////////////////////////////////////////////////////
  * inclusion control

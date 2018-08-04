@@ -50,7 +50,14 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include <crtdbg.h>
+#if 0
+#elif defined(_MSC_VER)
+
+# include <crtdbg.h>
+#else
+
+# include <assert.h>
+#endif
 
 /* /////////////////////////////////////////////////////////////////////////
  * compatibility
@@ -85,6 +92,16 @@ static char const s_guard[8] = { '~', '~', '~', '~', '~', '~', '~', '~', };
  */
 
 #define NUM_ELEMENTS_(ar)               (sizeof(ar) / sizeof(0[ar]))
+
+#if 0
+#elif defined(_MSC_VER)
+
+# define SSWDUV_ASSERT_                 _ASSERTE
+#else
+
+# define SSWDUV_ASSERT_                 assert
+#endif
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * helper function declarations
@@ -199,7 +216,7 @@ SSWinDiskUtil_LoadVolumes(
         return 0;
     }
 
-    _ASSERTE(NULL != pvolumes);
+    SSWDUV_ASSERT_(NULL != pvolumes);
 
     h = internal_FindFirstVolume_(&volId[0], NUM_ELEMENTS_(volId), &volLabel[0], NUM_ELEMENTS_(volLabel), &capacityBytes, &systemFreeBytes, &callerFreeBytes);
 
@@ -310,9 +327,9 @@ internal_copychars_(
 ,   size_t          n
 )
 {
-    _ASSERTE(NULL != pp);
-    _ASSERTE(NULL != *pp);
-    _ASSERTE(0 == n || NULL != s);
+    SSWDUV_ASSERT_(NULL != pp);
+    SSWDUV_ASSERT_(NULL != *pp);
+    SSWDUV_ASSERT_(0 == n || NULL != s);
 
     if (0 != n)
     {
@@ -350,8 +367,8 @@ internal_n_(
 ,   uint64_t    n
 )
 {
-    _ASSERTE(cap < 0x100000000);
-    _ASSERTE(n < 0x100000000);
+    SSWDUV_ASSERT_(cap < 0x100000000);
+    SSWDUV_ASSERT_(n < 0x100000000);
 
     return (cap << 32) | (n & 0xffffffff);
 }
@@ -454,7 +471,7 @@ internal_create_(
 
         /* guard: */
 
-        _ASSERTE(0 == memcmp(pGuard, s_guard, cbGuard));
+        SSWDUV_ASSERT_(0 == memcmp(pGuard, s_guard, cbGuard));
 
 
 
@@ -551,8 +568,8 @@ internal_append_(
                 vol->id.ptr             +=  d / sizeof(wchar_t);
                 vol->friendlyName.ptr   +=  d / sizeof(wchar_t);
 
-                _ASSERTE(vol->id.len == (size_t)lstrlenW(vol->id.ptr));
-                _ASSERTE(vol->friendlyName.len == (size_t)lstrlenW(vol->friendlyName.ptr));
+                SSWDUV_ASSERT_(vol->id.len == (size_t)lstrlenW(vol->id.ptr));
+                SSWDUV_ASSERT_(vol->friendlyName.len == (size_t)lstrlenW(vol->friendlyName.ptr));
             }
         }
 
@@ -587,7 +604,7 @@ internal_append_(
 
         /* guard: */
 
-        _ASSERTE(0 == memcmp(pGuard, s_guard, cbGuard));
+        SSWDUV_ASSERT_(0 == memcmp(pGuard, s_guard, cbGuard));
 
 
         p->numVolumes           =   internal_n_(newCap, newN);
