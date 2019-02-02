@@ -67,21 +67,60 @@ int wmain(int argc, wchar_t* argv[])
     {
         size_t j;
 
-        fwprintf(stdout, L"%I64u volume(s)\n", volumes->numVolumes);
+        fwprintf(stdout, L"%I64u volume(s):\n", volumes->numVolumes);
 
         for (j = 0; volumes->numVolumes != j; ++j)
         {
             SSWinDiskUtil_VolumeDescriptor_t const* const volume = &volumes->volumes[j];
 
-            fwprintf(
-                stdout
-            ,   L"%lu: id=%.*s label=\"%.*s\" free=%I64u capacity=%I64u\n"
-            ,   (unsigned int)j
-            ,   (int)volume->id.len, volume->id.ptr
-            ,   (int)volume->friendlyName.len, volume->friendlyName.ptr
-            ,   volume->callerFreeBytes
-            ,   volume->capacityBytes
-            );
+            if (showLabels)
+            {
+                if (showSpaces)
+                {
+                    fwprintf(
+                        stdout
+                    ,   L"%lu: id=%.*s label=\"%.*s\" free=%I64u capacity=%I64u\n"
+                    ,   (unsigned int)j
+                    ,   (int)volume->id.len, volume->id.ptr
+                    ,   (int)volume->friendlyName.len, volume->friendlyName.ptr
+                    ,   volume->callerFreeBytes
+                    ,   volume->capacityBytes
+                    );
+                }
+                else
+                {
+                    fwprintf(
+                        stdout
+                    ,   L"%lu: id=%.*s label=\"%.*s\"\n"
+                    ,   (unsigned int)j
+                    ,   (int)volume->id.len, volume->id.ptr
+                    ,   (int)volume->friendlyName.len, volume->friendlyName.ptr
+                    );
+                }
+            }
+            else
+            {
+                if (showSpaces)
+                {
+                    fwprintf(
+                        stdout
+                    ,   L"%lu: id=%.*s free=%I64u capacity=%I64u\n"
+                    ,   (unsigned int)j
+                    ,   (int)volume->id.len, volume->id.ptr
+                    ,   volume->callerFreeBytes
+                    ,   volume->capacityBytes
+                    );
+                }
+                else
+                {
+                    fwprintf(
+                        stdout
+                    ,   L"%lu: %.*s\n"
+                    ,   (unsigned int)j
+                    ,   (int)volume->id.len, volume->id.ptr
+                    );
+                }
+            }
         }
 
         SSWinDiskUtil_ReleaseVolumes(NULL, volumes);
