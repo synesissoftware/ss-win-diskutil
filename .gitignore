@@ -1,0 +1,32 @@
+
+# directories (by name)
+
+ipch/
+Win32/
+x64/
+
+Debug/
+Debug Multithreaded/
+Debug Multithreaded DLL/
+Release/
+Release Multithreaded/
+Release Multithreaded DLL/
+
+# directories (by pattern)
+
+# files (by name)
+
+.DS_Store
+
+# files (by pattern)
+
+*~
+*.obj
+*.opensdf
+*.sdf
+*.suo
+*.swp
+*.tmp
+
+*.vcxproj*user
+
