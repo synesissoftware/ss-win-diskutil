@@ -2,6 +2,7 @@
 # directories (by name)
 
 ipch/
+
 Win32/
 x64/
 
@@ -12,6 +13,8 @@ Release/
 Release Multithreaded/
 Release Multithreaded DLL/
 
+TestResults/
+
 # directories (by pattern)
 
 # files (by name)
@@ -21,12 +24,15 @@ Release Multithreaded DLL/
 # files (by pattern)
 
 *~
+*.ncb
 *.obj
 *.opensdf
+*.opt
 *.sdf
 *.suo
 *.swp
 *.tmp
 
+*.vcproj*user
 *.vcxproj*user
 
