@@ -41,10 +41,13 @@
 			<AdditionalIncludeDirectories Condition="exists('$(STLSOFT)/include')">$(STLSOFT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<AdditionalIncludeDirectories Condition="exists('$(RECLS_ROOT)/include')">$(RECLS_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<AdditionalIncludeDirectories Condition="exists('$(PANTHEIOS_ROOT)/include')">$(PANTHEIOS_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories Condition="exists('$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include')">$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories Condition="exists('$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include')">$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<AdditionalIncludeDirectories Condition="exists('$(FASTFORMAT_ROOT)/include')">$(FASTFORMAT_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 		</ClCompile>
 		<Link>
 			<AdditionalLibraryDirectories Condition="exists('$(RECLS_ROOT)/lib')">$(RECLS_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories Condition="exists('$(PANTHEIOS_ROOT)/lib')">$(PANTHEIOS_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<AdditionalLibraryDirectories Condition="exists('$(PANTHEIOS_ROOT)/lib')">$(PANTHEIOS_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<AdditionalLibraryDirectories Condition="exists('$(FASTFORMAT_ROOT)/lib')">$(FASTFORMAT_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 		</Link>
@@ -53,6 +56,8 @@
 	<ItemDefinitionGroup>
 		<ClCompile>
 			<AdditionalIncludeDirectories Condition="'$(JUSTTHREAD_ROOT)' != '' AND exists('$(JUSTTHREAD_ROOT)/include')">$(JUSTTHREAD_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+
+			<AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 
 			<BrowseInformation>true</BrowseInformation>
 			<CompileAsManaged>false</CompileAsManaged>
@@ -81,8 +86,14 @@
 			<TreatLibWarningsAsErrors>true</TreatLibWarningsAsErrors>
 		</Lib>
 		<Link>
+			<AdditionalDependencies>wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>ws2_32.lib;;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>odbc32.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<AdditionalDependencies>kernel32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-			<AdditionalDependencies>DbgHelp.lib;odbc32.lib;odbccp32.lib;shell32.lib;wininet.lib;ws2_32.lib;wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>DbgHelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<AdditionalLibraryDirectories Condition="'$(JUSTTHREAD_ROOT)' != '' AND exists('$(JUSTTHREAD_ROOT)/lib')">$(JUSTTHREAD_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<SubSystem>Console</SubSystem>
@@ -102,6 +113,7 @@
 			<Optimization>Disabled</Optimization>
 			<PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
 			<SmallerTypeCheck>true</SmallerTypeCheck>
 			<WholeProgramOptimization>false</WholeProgramOptimization>
 		</ClCompile>
@@ -128,6 +140,7 @@
 			<MinimalRebuild>false</MinimalRebuild>
 			<Optimization>Full</Optimization>
 			<PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
 			<SmallerTypeCheck>false</SmallerTypeCheck>
 			<WholeProgramOptimization>true</WholeProgramOptimization>
 		</ClCompile>

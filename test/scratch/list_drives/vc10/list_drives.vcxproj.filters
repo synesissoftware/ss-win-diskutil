@@ -36,5 +36,11 @@
     <ClCompile Include="..\pch.cpp">
       <Filter>Module Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\implicit_link.cpp">
+      <Filter>Module Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\diagnostics.cpp">
+      <Filter>Module Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
