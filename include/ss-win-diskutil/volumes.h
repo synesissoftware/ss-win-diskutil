@@ -8,13 +8,38 @@
  * types
  */
 
+/** String slice type
+ *
+ * @note A string slice type such as this is not required to refer to a
+ *   nul-terminated C-style string. Refer to the documentation of the
+ *   particular construct to inform whether the use(s) involve
+ *   nul-terminated strings
+ */
+struct SSWinDiskUtil_slice_w_t
+{
+    size_t                  len;    /*!< The length of the string */
+    wchar_t const*          ptr;    /*!< Pointer to the first character of the string */
+};
+#ifndef __cplusplus
+typedef struct SSWinDiskUtil_slice_w_t                      SSWinDiskUtil_slice_w_t;
+#endif /* !__cplusplus */
+
 struct SSWinDiskUtil_VolumeDescriptor_t
 {
-    wchar_t const*  id;
-    wchar_t const*  friendlyName;
-    uint64_t        capacityBytes;
-    uint64_t        freeBytes;
-    uint64_t        statusFlags;
+    SSWinDiskUtil_slice_w_t id;                     /*!<  */
+    SSWinDiskUtil_slice_w_t friendlyName;           /*!<  */
+#if 0
+
+    SSWinDiskUtil_slice_w_t friendlyName;
+#else
+
+    SSWinDiskUtil_slice_w_t reserved0;
+#endif
+    SSWinDiskUtil_slice_w_t reserved1[5];
+    uint64_t                capacityBytes;          /*!< The volume capacity */
+    uint64_t                systemFreeBytes;        /*!< The volume free-space */
+    uint64_t                callerFreeBytes;        /*!< The volume free-space as available to the caller */
+    uint64_t                statusFlags;            /*!< Status flags */
 };
 #ifndef __cplusplus
 typedef struct SSWinDiskUtil_VolumeDescriptor_t             SSWinDiskUtil_VolumeDescriptor_t;
@@ -125,6 +150,34 @@ ReleaseVolumes(
 } /* namespace DiskUtil */
 } /* namespace Windows */
 } /* namespace SynesisSoftware */
+#endif /* __cplusplus */
+
+/* /////////////////////////////////////////////////////////////////////////
+ * STLSoft string access shims
+ */
+
+#ifdef __cplusplus
+namespace stlsoft
+{
+    inline
+    size_t
+    c_str_len_w(
+        SSWinDiskUtil_slice_w_t const& sl
+    )
+    {
+        return sl.len;
+    }
+
+    inline
+    wchar_t const*
+    c_str_data_w(
+        SSWinDiskUtil_slice_w_t const& sl
+    )
+    {
+        return sl.ptr;
+    }
+
+} /* namespace stlsoft */
 #endif /* __cplusplus */
 
 /* /////////////////////////////////////////////////////////////////////////
