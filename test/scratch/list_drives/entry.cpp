@@ -62,7 +62,7 @@ main_(int /*argc*/, char* /*argv*/[])
         {
             auto const* vd = &volumes->volumes[i];
 
-            ff::fmtln(std::cout, "\t{0} / {1} : {2} of {3}", stlsoft::w2m(vd->id), stlsoft::w2m(vd->friendlyName), vd->systemFreeBytes, vd->capacityBytes);
+            ff::fmtln(std::cout, "\t{0} - '{1}' : {2} of {3}", stlsoft::w2m(vd->id), stlsoft::w2m(vd->friendlyName), vd->systemFreeBytes, vd->capacityBytes);
         }
     }
 

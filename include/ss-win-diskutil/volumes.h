@@ -17,8 +17,8 @@
  */
 struct SSWinDiskUtil_slice_w_t
 {
-    size_t                  len;    /*!< The length of the string */
-    wchar_t const*          ptr;    /*!< Pointer to the first character of the string */
+    size_t                      len;    /*!< The length of the string */
+    wchar_t const*              ptr;    /*!< Pointer to the first character of the string */
 };
 #ifndef __cplusplus
 typedef struct SSWinDiskUtil_slice_w_t                      SSWinDiskUtil_slice_w_t;
@@ -26,20 +26,13 @@ typedef struct SSWinDiskUtil_slice_w_t                      SSWinDiskUtil_slice_
 
 struct SSWinDiskUtil_VolumeDescriptor_t
 {
-    SSWinDiskUtil_slice_w_t id;                     /*!<  */
-    SSWinDiskUtil_slice_w_t friendlyName;           /*!<  */
-#if 0
-
-    SSWinDiskUtil_slice_w_t friendlyName;
-#else
-
-    SSWinDiskUtil_slice_w_t reserved0;
-#endif
-    SSWinDiskUtil_slice_w_t reserved1[5];
-    uint64_t                capacityBytes;          /*!< The volume capacity */
-    uint64_t                systemFreeBytes;        /*!< The volume free-space */
-    uint64_t                callerFreeBytes;        /*!< The volume free-space as available to the caller */
-    uint64_t                statusFlags;            /*!< Status flags */
+    SSWinDiskUtil_slice_w_t             id;                 /*!< The volume identifier */
+    SSWinDiskUtil_slice_w_t             friendlyName;       /*!< The volume friendly name */
+    SSWinDiskUtil_slice_w_t             reserved0[5];
+    uint64_t                            capacityBytes;      /*!< The volume capacity */
+    uint64_t                            systemFreeBytes;    /*!< The volume free-space */
+    uint64_t                            callerFreeBytes;    /*!< The volume free-space as available to the caller */
+    uint64_t                            statusFlags;        /*!< Status flags */
 };
 #ifndef __cplusplus
 typedef struct SSWinDiskUtil_VolumeDescriptor_t             SSWinDiskUtil_VolumeDescriptor_t;
@@ -47,8 +40,8 @@ typedef struct SSWinDiskUtil_VolumeDescriptor_t             SSWinDiskUtil_Volume
 
 struct SSWinDiskUtil_VolumeDescriptors_t
 {
-    size_t                              numVolumes; /*!< The number of volumes */
-    SSWinDiskUtil_VolumeDescriptor_t    volumes[1]; /*!< The array of volumes, of the size [numVolumes] */
+    uint64_t                            numVolumes;         /*!< The number of volumes */
+    SSWinDiskUtil_VolumeDescriptor_t    volumes[1];         /*!< The array of volumes, of the size [numVolumes] */
 };
 #ifndef __cplusplus
 typedef struct SSWinDiskUtil_VolumeDescriptors_t            SSWinDiskUtil_VolumeDescriptors_t;
