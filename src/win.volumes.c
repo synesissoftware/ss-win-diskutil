@@ -19,7 +19,10 @@
  * types
  */
 
+typedef SSWinDiskUtil_slice_w_t                 internal_slice_t;
 typedef SSWinDiskUtil_VolumeDescriptor_t        internal_descriptor_t;
+typedef SSWinDiskUtil_VolumeDescriptors_t       internal_descriptors_t;
+typedef SSWinDiskUtil_VolumeDescriptions_t      internal_descriptions_t;
 
 /* /////////////////////////////////////////////////////////////////////////
  * constants
@@ -62,55 +65,55 @@ internal_free_(
 );
 
 static
-SSWinDiskUtil_VolumeDescriptors_t*
+internal_descriptors_t*
 internal_create_(
-    wchar_t const*                      volId
-,   wchar_t const*                      volLabel
-,   uint64_t                            capacityBytes
-,   uint64_t                            systemFreeBytes
-,   uint64_t                            callerFreeBytes
+    wchar_t const*          volId
+,   wchar_t const*          volLabel
+,   uint64_t                capacityBytes
+,   uint64_t                systemFreeBytes
+,   uint64_t                callerFreeBytes
 );
 
 static
-SSWinDiskUtil_VolumeDescriptors_t*
+internal_descriptors_t*
 internal_append_(
-    SSWinDiskUtil_VolumeDescriptors_t*  current
-,   wchar_t const*                      volId
-,   wchar_t const*                      volLabel
-,   uint64_t                            capacityBytes
-,   uint64_t                            systemFreeBytes
-,   uint64_t                            callerFreeBytes
+    internal_descriptors_t* current
+,   wchar_t const*          volId
+,   wchar_t const*          volLabel
+,   uint64_t                capacityBytes
+,   uint64_t                systemFreeBytes
+,   uint64_t                callerFreeBytes
 );
 
 static
 void
 internal_destroy_(
-    SSWinDiskUtil_VolumeDescriptors_t const*    current
+    internal_descriptors_t const* current
 );
 
 static
 HANDLE
 internal_FindFirstVolume_(
-    wchar_t*    volumeId
-,   DWORD       cchVolumeId
-,   wchar_t*    volumeLabel
-,   DWORD       cchVolumeLabel
-,   uint64_t*   capacityBytes
-,   uint64_t*   systemFreeBytes
-,   uint64_t*   callerFreeBytes
+    wchar_t*                volumeId
+,   DWORD                   cchVolumeId
+,   wchar_t*                volumeLabel
+,   DWORD                   cchVolumeLabel
+,   uint64_t*               capacityBytes
+,   uint64_t*               systemFreeBytes
+,   uint64_t*               callerFreeBytes
 );
 
 static
 BOOL
 internal_FindNextVolume_(
-    HANDLE      hFind
-,   wchar_t*    volumeId
-,   DWORD       cchVolumeId
-,   wchar_t*    volumeLabel
-,   DWORD       cchVolumeLabel
-,   uint64_t*   capacityBytes
-,   uint64_t*   systemFreeBytes
-,   uint64_t*   callerFreeBytes
+    HANDLE                  hFind
+,   wchar_t*                volumeId
+,   DWORD                   cchVolumeId
+,   wchar_t*                volumeLabel
+,   DWORD                   cchVolumeLabel
+,   uint64_t*               capacityBytes
+,   uint64_t*               systemFreeBytes
+,   uint64_t*               callerFreeBytes
 );
 
 static
@@ -125,9 +128,9 @@ external_n_(
 
 int
 SSWinDiskUtil_LoadVolumes(
-    void*                               reserved
-,   int64_t                             flags
-,   SSWinDiskUtil_VolumeDescriptions_t* pvolumes
+    void*                       reserved
+,   int64_t                     flags
+,   internal_descriptions_t*    pvolumes
 )
 {
     WCHAR       volId[CCH_VOLID_ + 1];
@@ -161,7 +164,7 @@ SSWinDiskUtil_LoadVolumes(
     }
     else
     {
-        SSWinDiskUtil_VolumeDescriptors_t* volumes = internal_create_(volId, volLabel, capacityBytes, systemFreeBytes, callerFreeBytes);
+        internal_descriptors_t* volumes = internal_create_(volId, volLabel, capacityBytes, systemFreeBytes, callerFreeBytes);
 
         if (NULL == volumes)
         {
@@ -175,7 +178,7 @@ SSWinDiskUtil_LoadVolumes(
 
             for (; internal_FindNextVolume_(h, &volId[0], NUM_ELEMENTS_(volId), &volLabel[0], NUM_ELEMENTS_(volLabel), &capacityBytes, &systemFreeBytes, &callerFreeBytes); ++n)
             {
-                SSWinDiskUtil_VolumeDescriptors_t* newVolumes = internal_append_(volumes, volId, volLabel, capacityBytes, systemFreeBytes, callerFreeBytes);
+                internal_descriptors_t* const newVolumes = internal_append_(volumes, volId, volLabel, capacityBytes, systemFreeBytes, callerFreeBytes);
 
                 if (NULL == newVolumes)
                 {
@@ -204,8 +207,8 @@ SSWinDiskUtil_LoadVolumes(
 
 int
 SSWinDiskUtil_ReleaseVolumes(
-    void*                               reserved
-,   SSWinDiskUtil_VolumeDescriptions_t  volumes
+    void*                       reserved
+,   internal_descriptions_t     volumes
 )
 {
     ((void)reserved);
@@ -216,7 +219,7 @@ SSWinDiskUtil_ReleaseVolumes(
 }
 
 /* /////////////////////////////////////////////////////////////////////////
- * helper function declarations
+ * helper function definitions
  */
 
 static
@@ -319,13 +322,13 @@ external_n_(
 
 
 static
-SSWinDiskUtil_VolumeDescriptors_t*
+internal_descriptors_t*
 internal_create_(
-    wchar_t const*                      volId
-,   wchar_t const*                      volLabel
-,   uint64_t                            capacityBytes
-,   uint64_t                            systemFreeBytes
-,   uint64_t                            callerFreeBytes
+    wchar_t const*          volId
+,   wchar_t const*          volLabel
+,   uint64_t                capacityBytes
+,   uint64_t                systemFreeBytes
+,   uint64_t                callerFreeBytes
 )
 {
     /* While building, we use the top 32-bits of the descriptors' numVolumes
@@ -342,15 +345,15 @@ internal_create_(
 
     /* Allocate space for:
      *
-     * - 1 x SSWinDiskUtil_VolumeDescriptors_t
-     * - (newCap - 1) x SSWinDiskUtil_VolumeDescriptor_t
+     * - 1 x internal_descriptors_t
+     * - (newCap - 1) x internal_descriptor_t
      * - volId (+ nul)
      * - volLabel (+ nul)
      */
 
     size_t                              cbCtrl      =   0
-                                                    +   sizeof(SSWinDiskUtil_VolumeDescriptors_t)
-                                                    +   sizeof(SSWinDiskUtil_VolumeDescriptor_t) * (newCap - 1)
+                                                    +   sizeof(internal_descriptors_t)
+                                                    +   sizeof(internal_descriptor_t) * (newCap - 1)
                                                     ;
     size_t                              cbText      =   0
                                                     +   sizeof(wchar_t) * (1 + cchId)
@@ -362,11 +365,11 @@ internal_create_(
                                                     +   cbText
                                                     +   cbGuard
                                                     ;
-    SSWinDiskUtil_VolumeDescriptors_t*  p           =   (SSWinDiskUtil_VolumeDescriptors_t*)internal_allocate_(cb);
+    internal_descriptors_t*  p           =   (internal_descriptors_t*)internal_allocate_(cb);
 
     if (NULL != p)
     {
-        SSWinDiskUtil_VolumeDescriptor_t* const pVol0   =   &p->volumes[0];
+        internal_descriptor_t* const pVol0   =   &p->volumes[0];
         void* const                             pGuard  =   (char*)p + (cb - cbGuard);
         wchar_t*                                pText   =   (wchar_t*)&p->volumes[newCap];
 
@@ -417,14 +420,14 @@ internal_create_(
 }
 
 static
-SSWinDiskUtil_VolumeDescriptors_t*
+internal_descriptors_t*
 internal_append_(
-    SSWinDiskUtil_VolumeDescriptors_t*  current
-,   wchar_t const*                      volId
-,   wchar_t const*                      volLabel
-,   uint64_t                            capacityBytes
-,   uint64_t                            systemFreeBytes
-,   uint64_t                            callerFreeBytes
+    internal_descriptors_t* current
+,   wchar_t const*          volId
+,   wchar_t const*          volLabel
+,   uint64_t                capacityBytes
+,   uint64_t                systemFreeBytes
+,   uint64_t                callerFreeBytes
 )
 {
     size_t const                        currCap     =   (current->numVolumes >> 32) & 0xffffffff;
@@ -438,16 +441,16 @@ internal_append_(
 
     /* Reallocate space for:
      *
-     * - 1 x SSWinDiskUtil_VolumeDescriptors_t
-     * - (newCap - 1) x SSWinDiskUtil_VolumeDescriptor_t
+     * - 1 x internal_descriptors_t
+     * - (newCap - 1) x internal_descriptor_t
      * - currently used text space
      * - volId (+ nul)
      * - volLabel (+ nul)
      */
 
     size_t                              cbCtrl      =   0
-                                                    +   sizeof(SSWinDiskUtil_VolumeDescriptors_t)
-                                                    +   sizeof(SSWinDiskUtil_VolumeDescriptor_t) * (newCap - 1)
+                                                    +   sizeof(internal_descriptors_t)
+                                                    +   sizeof(internal_descriptor_t) * (newCap - 1)
                                                     ;
     internal_descriptor_t* const        pVolL       =   &current->volumes[currN - 1];
     internal_descriptor_t* const        pVolN       =   &current->volumes[currCap];
@@ -469,7 +472,7 @@ internal_append_(
                                                     +   cbText
                                                     +   cbGuard
                                                     ;
-    SSWinDiskUtil_VolumeDescriptors_t*  p           =   (SSWinDiskUtil_VolumeDescriptors_t*)internal_reallocate_(current, cb);
+    internal_descriptors_t*  p           =   (internal_descriptors_t*)internal_reallocate_(current, cb);
 
     if (NULL != p)
     {
@@ -551,7 +554,7 @@ internal_append_(
 static
 void
 internal_destroy_(
-    SSWinDiskUtil_VolumeDescriptors_t const*    current
+    internal_descriptors_t const* current
 )
 {
     void* p = (void*)current;
@@ -562,12 +565,12 @@ internal_destroy_(
 static
 void
 internal_get_label_and_spaces_(
-    wchar_t const*  volumeId
-,   wchar_t*        volumeLabel
-,   DWORD           cchVolumeLabel
-,   uint64_t*       capacityBytes
-,   uint64_t*       systemFreeBytes
-,   uint64_t*       callerFreeBytes
+    wchar_t const*          volumeId
+,   wchar_t*                volumeLabel
+,   DWORD                   cchVolumeLabel
+,   uint64_t*               capacityBytes
+,   uint64_t*               systemFreeBytes
+,   uint64_t*               callerFreeBytes
 )
 {
     ULARGE_INTEGER      freeBytesAvailableToCaller;
@@ -590,13 +593,13 @@ internal_get_label_and_spaces_(
 static
 HANDLE
 internal_FindFirstVolume_(
-    wchar_t*    volumeId
-,   DWORD       cchVolumeId
-,   wchar_t*    volumeLabel
-,   DWORD       cchVolumeLabel
-,   uint64_t*   capacityBytes
-,   uint64_t*   systemFreeBytes
-,   uint64_t*   callerFreeBytes
+    wchar_t*                volumeId
+,   DWORD                   cchVolumeId
+,   wchar_t*                volumeLabel
+,   DWORD                   cchVolumeLabel
+,   uint64_t*               capacityBytes
+,   uint64_t*               systemFreeBytes
+,   uint64_t*               callerFreeBytes
 )
 {
     HANDLE hFind = FindFirstVolumeW(volumeId, cchVolumeId);
@@ -612,14 +615,14 @@ internal_FindFirstVolume_(
 static
 BOOL
 internal_FindNextVolume_(
-    HANDLE      hFind
-,   wchar_t*    volumeId
-,   DWORD       cchVolumeId
-,   wchar_t*    volumeLabel
-,   DWORD       cchVolumeLabel
-,   uint64_t*   capacityBytes
-,   uint64_t*   systemFreeBytes
-,   uint64_t*   callerFreeBytes
+    HANDLE                  hFind
+,   wchar_t*                volumeId
+,   DWORD                   cchVolumeId
+,   wchar_t*                volumeLabel
+,   DWORD                   cchVolumeLabel
+,   uint64_t*               capacityBytes
+,   uint64_t*               systemFreeBytes
+,   uint64_t*               callerFreeBytes
 )
 {
     BOOL b = FindNextVolumeW(hFind, volumeId, cchVolumeId);
