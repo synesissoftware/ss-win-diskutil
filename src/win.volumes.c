@@ -335,7 +335,7 @@ internal_create_(
      * for the offset
      */
 
-    size_t const                        nLogical    =   1 /* internal_num_logical_drives_() */;
+    size_t const                        nLogical    =   internal_num_logical_drives_();
 
     size_t const                        newCap      =   nLogical;
     size_t const                        newN        =   1;
