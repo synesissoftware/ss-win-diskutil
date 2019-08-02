@@ -24,6 +24,7 @@ TestResults/
 # files (by pattern)
 
 *~
+*.bsc
 *.ncb
 *.obj
 *.opensdf
@@ -35,4 +36,6 @@ TestResults/
 
 *.vcproj*user
 *.vcxproj*user
+
+lib/*.lib
 
