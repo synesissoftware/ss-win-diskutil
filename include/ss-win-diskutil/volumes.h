@@ -38,6 +38,9 @@ struct SSWinDiskUtil_VolumeDescriptor_t
 typedef struct SSWinDiskUtil_VolumeDescriptor_t             SSWinDiskUtil_VolumeDescriptor_t;
 #endif /* !__cplusplus */
 
+/** Volume descriptors structure
+ *
+ */
 struct SSWinDiskUtil_VolumeDescriptors_t
 {
     uint64_t                            numVolumes;         /*!< The number of volumes */
@@ -47,6 +50,9 @@ struct SSWinDiskUtil_VolumeDescriptors_t
 typedef struct SSWinDiskUtil_VolumeDescriptors_t            SSWinDiskUtil_VolumeDescriptors_t;
 #endif /* !__cplusplus */
 
+/** Volume descriptions handle
+ *
+ */
 typedef SSWinDiskUtil_VolumeDescriptors_t const*            SSWinDiskUtil_VolumeDescriptions_t;
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -77,6 +83,13 @@ SSWinDiskUtil_LoadVolumes(
 ,   SSWinDiskUtil_VolumeDescriptions_t*     pvolumes
 );
 
+/** Releases all resources associated with the volumes
+ *
+ * @param reserved [in] (void*) Reserved. Must be \c nullptr
+ * @param volumes [in] The descriptions handle
+ *
+ * @retval 0
+ */
 int
 SSWinDiskUtil_ReleaseVolumes(
     void*                                   reserved
@@ -115,6 +128,10 @@ typedef SSWinDiskUtil_VolumeDescriptions_t                  VolumeDescriptions_t
 
 #ifdef __cplusplus
 
+/** Obtains the volumes information for the host
+ *
+ * @see SSWinDiskUtil_LoadVolumes()
+ */
 inline
 int
 LoadVolumes(
@@ -125,6 +142,10 @@ LoadVolumes(
     return SSWinDiskUtil_LoadVolumes(nullptr, flags, pvolumes);
 }
 
+/** Releases all resources associated with the volumes
+ *
+ * @see SSWinDiskUtil_ReleaseVolumes()
+ */
 inline
 int
 ReleaseVolumes(
