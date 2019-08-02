@@ -1,7 +1,7 @@
 
 #include <pantheios/pan.hpp>
 
-#include <ss-win-diskutil/volumes.h>
+#include <ss-win-diskutil.h>
 
 #include <fastformat/ff.hpp>
 #include <fastformat/sinks/iostream.hpp>

@@ -34,6 +34,12 @@
     <ClInclude Include="..\pch.hpp">
       <Filter>Module Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\include\ss-win-diskutil.h">
+      <Filter>Header Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\include\ss-win-diskutil\version.h">
+      <Filter>Header Files\include\ss-win-diskutil</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\..\include\ss-win-diskutil\volumes.h">
       <Filter>Header Files\include\ss-win-diskutil</Filter>
     </ClInclude>

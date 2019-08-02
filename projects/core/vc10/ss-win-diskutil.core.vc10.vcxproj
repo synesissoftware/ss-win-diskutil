@@ -77,6 +77,8 @@
     <ClCompile Include="..\..\..\src\win.volumes.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\ss-win-diskutil.h" />
+    <ClInclude Include="..\..\..\include\ss-win-diskutil\version.h" />
     <ClInclude Include="..\..\..\include\ss-win-diskutil\volumes.h" />
   </ItemGroup>
 </Project>

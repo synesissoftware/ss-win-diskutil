@@ -103,6 +103,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\include\ss-win-diskutil.h" />
+    <ClInclude Include="..\..\..\..\include\ss-win-diskutil\version.h" />
     <ClInclude Include="..\..\..\..\include\ss-win-diskutil\volumes.h" />
     <ClInclude Include="..\pch.hpp" />
     <ClInclude Include="..\_dev_pragmatics_\warnings.msvc.10+.h" />
