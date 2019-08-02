@@ -5,20 +5,26 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Header Files\include">
+      <UniqueIdentifier>{83ced667-dacc-4197-91a6-9cf7c10a30bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Module Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Header Files\include\ss-win-diskutil">
+      <UniqueIdentifier>{7efeee7b-2924-4f98-a690-71d2a23024e0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Implementation Files">
       <UniqueIdentifier>{f69f2600-777b-4f06-9238-5b82e74ebcff}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;</Extensions>
     </Filter>
+    <Filter Include="Module Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
     <Filter Include="Module Files\_dev_pragmatics_">
       <UniqueIdentifier>{4ce75cad-a122-423d-9a6e-bb25707a2eaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -27,6 +33,9 @@
     </ClInclude>
     <ClInclude Include="..\pch.hpp">
       <Filter>Module Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\include\ss-win-diskutil\volumes.h">
+      <Filter>Header Files\include\ss-win-diskutil</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

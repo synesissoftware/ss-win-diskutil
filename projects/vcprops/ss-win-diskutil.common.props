@@ -44,12 +44,14 @@
 			<AdditionalIncludeDirectories Condition="exists('$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include')">$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<AdditionalIncludeDirectories Condition="exists('$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include')">$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 			<AdditionalIncludeDirectories Condition="exists('$(FASTFORMAT_ROOT)/include')">$(FASTFORMAT_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories Condition="exists('$(CSTRING_ROOT)/include')">$(CSTRING_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 		</ClCompile>
 		<Link>
 			<AdditionalLibraryDirectories Condition="exists('$(RECLS_ROOT)/lib')">$(RECLS_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<AdditionalLibraryDirectories Condition="exists('$(PANTHEIOS_ROOT)/lib')">$(PANTHEIOS_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<AdditionalLibraryDirectories Condition="exists('$(PANTHEIOS_ROOT)/lib')">$(PANTHEIOS_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 			<AdditionalLibraryDirectories Condition="exists('$(FASTFORMAT_ROOT)/lib')">$(FASTFORMAT_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories Condition="exists('$(CSTRING_ROOT)/include')">$(CSTRING_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 		</Link>
 	</ItemDefinitionGroup>
 
@@ -76,7 +78,7 @@
 			<SuppressStartupBanner>true</SuppressStartupBanner>
 			<TreatSpecificWarningsAsErrors>4701;</TreatSpecificWarningsAsErrors>
 			<TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-			<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+			<TreatWarningAsError>true</TreatWarningAsError>
 			<WarningLevel>Level4</WarningLevel>
 		</ClCompile>
 		<Lib>
