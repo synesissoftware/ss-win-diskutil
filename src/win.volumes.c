@@ -45,10 +45,9 @@
 
 #include <ss-win-diskutil/volumes.h>
 
-#include <stdint.h>
-
 #include <windows.h>
 
+#include <stdint.h>
 #include <stdlib.h>
 
 #include <crtdbg.h>

@@ -17,11 +17,6 @@
 
 #include <crtdbg.h>
 
-inline unsigned long st2ul(size_t n)
-{
-    return stlsoft::truncation_cast<unsigned long>(n);
-}
-
 static
 int
 main_(int argc, char* argv[]);
