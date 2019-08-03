@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{4AB9A3E7-9552-48EE-B735-56E0AA35FF0D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ss-win-diskutil.core.vc10", "projects\core\vc10\ss-win-diskutil.core.vc10.vcxproj", "{13D12A81-AB7D-40F4-ADC2-D32DCD62FC40}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{91C90528-1ACA-409C-8B09-DD427A0A05F3}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "projects", "projects", "{183293E2-AE32-4AAE-908D-262C520A1C36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{17695BF5-068F-4755-8888-8EF130D0731C}"
+	ProjectSection(SolutionItems) = preProject
+		projects\scripts\copy_lib.cmd = projects\scripts\copy_lib.cmd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "support", "support", "{2EAE4395-0CDE-4AFF-89F0-05DA09B6BDB8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clcp", "projects\support\clcp\clcp.vcxproj", "{9656C7A4-9DAC-4808-A6EA-68A27406844B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vcprops", "vcprops", "{09EF9C83-A34F-451A-A416-4BB7EE44ED35}"
+	ProjectSection(SolutionItems) = preProject
+		projects\vcprops\ss-win-diskutil.common.props = projects\vcprops\ss-win-diskutil.common.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{DA98C451-95C8-405D-8942-DEA6617AF78C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scratch", "scratch", "{6292B061-A914-40C4-A0C2-639BFF4E185B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "list_drives", "test\scratch\list_drives\vc10\list_drives.vcxproj", "{C030E861-9F05-494C-827E-448DF284C057}"
+	ProjectSection(ProjectDependencies) = postProject
+		{13D12A81-AB7D-40F4-ADC2-D32DCD62FC40} = {13D12A81-AB7D-40F4-ADC2-D32DCD62FC40}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug Multithreaded|Win32 = Debug Multithreaded|Win32
+		Debug Multithreaded|x64 = Debug Multithreaded|x64
+		Release Multithreaded|Win32 = Release Multithreaded|Win32
+		Release Multithreaded|x64 = Release Multithreaded|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13D12A81-AB7D-40F4-ADC2-D32DCD62FC40}.Debug Multithreaded|Win32.ActiveCfg = Debug Multithreaded|Win32
+		{13D12A81-AB7D-40F4-ADC2-D32DCD62FC40}.Debug Multithreaded|Win32.Build.0 = Debug Multithreaded|Win32
+		{13D12A81-AB7D-40F4-ADC2-D32DCD62FC40}.Debug Multithreaded|x64.ActiveCfg = Debug Multithreaded|x64
+		{13D12A81-AB7D-40F4-ADC2-D32DCD62FC40}.Debug Multithreaded|x64.Build.0 = Debug Multithreaded|x64
+		{13D12A81-AB7D-40F4-ADC2-D32DCD62FC40}.Release Multithreaded|Win32.ActiveCfg = Release Multithreaded|Win32
+		{13D12A81-AB7D-40F4-ADC2-D32DCD62FC40}.Release Multithreaded|Win32.Build.0 = Release Multithreaded|Win32
+		{13D12A81-AB7D-40F4-ADC2-D32DCD62FC40}.Release Multithreaded|x64.ActiveCfg = Release Multithreaded|x64
+		{13D12A81-AB7D-40F4-ADC2-D32DCD62FC40}.Release Multithreaded|x64.Build.0 = Release Multithreaded|x64
+		{9656C7A4-9DAC-4808-A6EA-68A27406844B}.Debug Multithreaded|Win32.ActiveCfg = Debug Multithreaded|Win32
+		{9656C7A4-9DAC-4808-A6EA-68A27406844B}.Debug Multithreaded|Win32.Build.0 = Debug Multithreaded|Win32
+		{9656C7A4-9DAC-4808-A6EA-68A27406844B}.Debug Multithreaded|x64.ActiveCfg = Debug Multithreaded|x64
+		{9656C7A4-9DAC-4808-A6EA-68A27406844B}.Debug Multithreaded|x64.Build.0 = Debug Multithreaded|x64
+		{9656C7A4-9DAC-4808-A6EA-68A27406844B}.Release Multithreaded|Win32.ActiveCfg = Release Multithreaded|Win32
+		{9656C7A4-9DAC-4808-A6EA-68A27406844B}.Release Multithreaded|x64.ActiveCfg = Release Multithreaded|x64
+		{C030E861-9F05-494C-827E-448DF284C057}.Debug Multithreaded|Win32.ActiveCfg = Debug Multithreaded|Win32
+		{C030E861-9F05-494C-827E-448DF284C057}.Debug Multithreaded|Win32.Build.0 = Debug Multithreaded|Win32
+		{C030E861-9F05-494C-827E-448DF284C057}.Debug Multithreaded|x64.ActiveCfg = Debug Multithreaded|x64
+		{C030E861-9F05-494C-827E-448DF284C057}.Debug Multithreaded|x64.Build.0 = Debug Multithreaded|x64
+		{C030E861-9F05-494C-827E-448DF284C057}.Release Multithreaded|Win32.ActiveCfg = Release Multithreaded|Win32
+		{C030E861-9F05-494C-827E-448DF284C057}.Release Multithreaded|Win32.Build.0 = Release Multithreaded|Win32
+		{C030E861-9F05-494C-827E-448DF284C057}.Release Multithreaded|x64.ActiveCfg = Release Multithreaded|x64
+		{C030E861-9F05-494C-827E-448DF284C057}.Release Multithreaded|x64.Build.0 = Release Multithreaded|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{13D12A81-AB7D-40F4-ADC2-D32DCD62FC40} = {4AB9A3E7-9552-48EE-B735-56E0AA35FF0D}
+		{183293E2-AE32-4AAE-908D-262C520A1C36} = {91C90528-1ACA-409C-8B09-DD427A0A05F3}
+		{17695BF5-068F-4755-8888-8EF130D0731C} = {183293E2-AE32-4AAE-908D-262C520A1C36}
+		{2EAE4395-0CDE-4AFF-89F0-05DA09B6BDB8} = {183293E2-AE32-4AAE-908D-262C520A1C36}
+		{09EF9C83-A34F-451A-A416-4BB7EE44ED35} = {183293E2-AE32-4AAE-908D-262C520A1C36}
+		{9656C7A4-9DAC-4808-A6EA-68A27406844B} = {2EAE4395-0CDE-4AFF-89F0-05DA09B6BDB8}
+		{6292B061-A914-40C4-A0C2-639BFF4E185B} = {DA98C451-95C8-405D-8942-DEA6617AF78C}
+		{C030E861-9F05-494C-827E-448DF284C057} = {6292B061-A914-40C4-A0C2-639BFF4E185B}
+	EndGlobalSection
+EndGlobal

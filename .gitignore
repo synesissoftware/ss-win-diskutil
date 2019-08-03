@@ -1,52 +1,67 @@
-# Prerequisites
-*.d
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+# directories (by name)
 
-# Linker output
-*.ilk
-*.map
-*.exp
+bin/
+lib/
 
-# Precompiled Headers
-*.gch
-*.pch
+ipch/
 
-# Libraries
-*.lib
+Win32/
+x64/
+
+Debug/
+Debug Multithreaded/
+Debug Multithreaded DLL/
+Release/
+Release Multithreaded/
+Release Multithreaded DLL/
+
+TestResults/
+
+.tmp_versions/
+
+# directories (by pattern)
+
+# files (by name)
+
+.DS_Store
+
+Mkfile.old
+Module.symvers
+dkms.conf
+modules.order
+
+# files (by pattern)
+
+*~
 *.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
+*.app
+*.bsc
 *.dll
+*.dylib
+*.elf
+*.exe
+*.exp
+*.gch
+*.idb
+*.ilk
+*.lib
+*.map
+*.ncb
+*.o
+*.obj
+*.opensdf
+*.opt
+*.out
+*.pch
+*.pdb
+*.sdf
 *.so
 *.so.*
-*.dylib
+*.suo
+*.swp
+*.tmp
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+*.vcproj*user
+*.vcxproj*user
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf

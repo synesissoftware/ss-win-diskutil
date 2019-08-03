@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<ItemGroup Label="PropertySheets" />
+
+	<PropertyGroup Label="UserMacros" />
+
+	<PropertyGroup>
+
+		<CharacterSet>Multibyte</CharacterSet>
+		<IntDir>$(SolutionDir)build/$(Configuration)/$(Platform)/$({ProjectName)/</IntDir>
+		<LinkIncrementalDir>false</LinkIncrementalDir>
+		<OutDir>$(SolutionDir)build/$(Configuration)/$(Platform)/</OutDir>
+		<TargetName>$(ProjectName)</TargetName>
+		<UseOfMfc>false</UseOfMfc>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(Configuration.Contains('Debug'))">
+
+		<WholeProgramOptimization>false</WholeProgramOptimization>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(Configuration.Contains('Release'))">
+
+		<WholeProgramOptimization>true</WholeProgramOptimization>
+	</PropertyGroup>
+
+	<ItemDefinitionGroup Condition="$(Configuration.Contains('Unix')) OR $(Configuration.Contains('UNIX'))">
+		<ClCompile>
+			<AdditionalIncludeDirectories Condition="exists('$(UNIXEM)/include')">$(UNIXEM)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories Condition="exists('$(PTHREADS_WIN32)/include')">$(PTHREADS_WIN32)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<PreprocessorDefinitions>UNIX;_REENTRANT;_STLSOFT_FORCE_ANY_COMPILER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+		</ClCompile>
+		<Link>
+			<AdditionalLibraryDirectories Condition="exists('$(UNIXEM)/lib')">$(UNIXEM)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+		</Link>
+	</ItemDefinitionGroup>
+
+	<ItemDefinitionGroup>
+		<ClCompile>
+			<AdditionalIncludeDirectories Condition="exists('$(STLSOFT)/include')">$(STLSOFT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories Condition="exists('$(RECLS_ROOT)/include')">$(RECLS_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories Condition="exists('$(PANTHEIOS_ROOT)/include')">$(PANTHEIOS_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories Condition="exists('$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include')">$(PANTHEIOS_EXTRAS_DIAGUTIL_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories Condition="exists('$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include')">$(PANTHEIOS_EXTRAS_MAIN_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories Condition="exists('$(FASTFORMAT_ROOT)/include')">$(FASTFORMAT_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories Condition="exists('$(CSTRING_ROOT)/include')">$(CSTRING_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+		</ClCompile>
+		<Link>
+			<AdditionalLibraryDirectories Condition="exists('$(RECLS_ROOT)/lib')">$(RECLS_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories Condition="exists('$(PANTHEIOS_ROOT)/lib')">$(PANTHEIOS_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories Condition="exists('$(PANTHEIOS_ROOT)/lib')">$(PANTHEIOS_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories Condition="exists('$(FASTFORMAT_ROOT)/lib')">$(FASTFORMAT_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+			<AdditionalLibraryDirectories Condition="exists('$(CSTRING_ROOT)/include')">$(CSTRING_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+		</Link>
+	</ItemDefinitionGroup>
+
+	<ItemDefinitionGroup>
+		<ClCompile>
+			<AdditionalIncludeDirectories Condition="'$(JUSTTHREAD_ROOT)' != '' AND exists('$(JUSTTHREAD_ROOT)/include')">$(JUSTTHREAD_ROOT)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+
+			<AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+
+			<BrowseInformation>true</BrowseInformation>
+			<CompileAsManaged>false</CompileAsManaged>
+
+			<!-- Use C7 so don't have to worry about PDB file locations -->
+			<!--<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>-->
+			<DebugInformationFormat>OldStyle</DebugInformationFormat>
+
+			<EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+			<ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+			<ForcedIncludeFiles>pch.hpp</ForcedIncludeFiles>
+			<MultiProcessorCompilation>false</MultiProcessorCompilation>
+			<PrecompiledHeader>Use</PrecompiledHeader>
+			<PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+			<PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+			<PreprocessorDefinitions>NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<ProgramDataBaseFileName>$(IntDir)$(Targetname).pdb</ProgramDataBaseFileName>
+			<RuntimeTypeInfo>true</RuntimeTypeInfo>
+			<StringPooling>true</StringPooling>
+			<SuppressStartupBanner>true</SuppressStartupBanner>
+			<TreatSpecificWarningsAsErrors>4701;</TreatSpecificWarningsAsErrors>
+			<TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+			<TreatWarningAsError>true</TreatWarningAsError>
+			<WarningLevel>Level4</WarningLevel>
+		</ClCompile>
+		<Lib>
+			<GenerateDebugInformation>true</GenerateDebugInformation>
+			<OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+			<SuppressStartupBanner>true</SuppressStartupBanner>
+			<TreatLibWarningsAsErrors>true</TreatLibWarningsAsErrors>
+		</Lib>
+		<Link>
+			<AdditionalDependencies>wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>ws2_32.lib;;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>odbc32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>kernel32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalDependencies>DbgHelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+
+			<AdditionalLibraryDirectories Condition="'$(JUSTTHREAD_ROOT)' != '' AND exists('$(JUSTTHREAD_ROOT)/lib')">$(JUSTTHREAD_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+
+			<AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+
+			<GenerateDebugInformation>true</GenerateDebugInformation>
+			<SubSystem>Console</SubSystem>
+		</Link>
+		<ImpLib>
+			<GenerateDebugInformation>true</GenerateDebugInformation>
+		</ImpLib>
+		<PostBuildEvent>
+		</PostBuildEvent>
+	</ItemDefinitionGroup>
+
+	<ItemDefinitionGroup Condition="$(Configuration.Contains('Debug'))">
+		<ClCompile>
+			<InlineFunctionExpansion>Default</InlineFunctionExpansion>
+			<IntrinsicFunctions>false</IntrinsicFunctions>
+			<MinimalRebuild>false</MinimalRebuild>
+			<Optimization>Disabled</Optimization>
+			<PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+			<SmallerTypeCheck>true</SmallerTypeCheck>
+			<WholeProgramOptimization>false</WholeProgramOptimization>
+		</ClCompile>
+	</ItemDefinitionGroup>
+
+	<ItemDefinitionGroup Condition="$(Configuration.Contains('Debug Multithreaded'))">
+		<ClCompile>
+			<RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+		</ClCompile>
+	</ItemDefinitionGroup>
+
+	<ItemDefinitionGroup Condition="$(Configuration.Contains('Debug Multithreaded DLL')) OR $(Configuration.Contains('Debug Multithreaded Dll'))">
+		<ClCompile>
+			<RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+		</ClCompile>
+	</ItemDefinitionGroup>
+
+	<ItemDefinitionGroup Condition="$(Configuration.Contains('Release'))">
+		<ClCompile>
+			<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+			<FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+			<InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+			<IntrinsicFunctions>true</IntrinsicFunctions>
+			<MinimalRebuild>false</MinimalRebuild>
+			<Optimization>Full</Optimization>
+			<PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+			<SmallerTypeCheck>false</SmallerTypeCheck>
+			<WholeProgramOptimization>true</WholeProgramOptimization>
+		</ClCompile>
+		<Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+			<LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+		</Link>
+	</ItemDefinitionGroup>
+
+	<ItemDefinitionGroup Condition="$(Configuration.Contains('Release Multithreaded'))">
+		<ClCompile>
+			<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+		</ClCompile>
+	</ItemDefinitionGroup>
+
+	<ItemDefinitionGroup Condition="$(Configuration.Contains('Release Multithreaded DLL')) OR $(Configuration.Contains('Release Multithreaded Dll'))">
+		<ClCompile>
+			<RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
+		</ClCompile>
+	</ItemDefinitionGroup>
+
+
+	<ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
+		<ClCompile>
+			<PreprocessorDefinitions Condition="!($(Configuration.Contains('Unix')) OR $(Configuration.Contains('UNIX')))">WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+		</ClCompile>
+		<Lib>
+			<TargetMachine>MachineX86</TargetMachine>
+		</Lib>
+		<Link>
+			<TargetMachine>MachineX86</TargetMachine>
+		</Link>
+	</ItemDefinitionGroup>
+
+	<ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
+		<ClCompile>
+			<PreprocessorDefinitions Condition="!($(Configuration.Contains('Unix')) OR $(Configuration.Contains('UNIX')))">WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+		</ClCompile>
+		<Lib>
+			<TargetMachine>MachineX64</TargetMachine>
+		</Lib>
+		<Link>
+			<TargetMachine>MachineX64</TargetMachine>
+		</Link>
+	</ItemDefinitionGroup>
+
+
+	<ItemDefinitionGroup Condition="$(Configuration.Contains(' STRICT'))">
+		<ClCompile>
+			<PreprocessorDefinitions>STRICT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+		</ClCompile>
+		<Link>
+		</Link>
+	</ItemDefinitionGroup>
+
+	<ItemDefinitionGroup Condition="$(Configuration.Contains(' UNSTRICT')) OR $(Configuration.Contains(' NO_STRICT'))">
+		<ClCompile>
+			<PreprocessorDefinitions>NO_STRICT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<UndefinePreprocessorDefinitions>STRICT;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
+		</ClCompile>
+		<Link>
+		</Link>
+	</ItemDefinitionGroup>
+
+
+</Project>
