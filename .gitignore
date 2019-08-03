@@ -1,6 +1,9 @@
 
 # directories (by name)
 
+bin/
+lib/
+
 ipch/
 
 Win32/
@@ -37,5 +40,4 @@ TestResults/
 *.vcproj*user
 *.vcxproj*user
 
-lib/*.lib
 
