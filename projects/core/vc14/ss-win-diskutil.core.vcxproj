@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug Multithreaded|Win32">
       <Configuration>Debug Multithreaded</Configuration>
@@ -19,22 +19,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F373E5AF-79D6-4297-92A2-A28EE764D9C2}</ProjectGuid>
+    <ProjectGuid>{13D12A81-AB7D-40f4-ADC2-D32DCD62FC40}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>list_volumes</RootNamespace>
+    <RootNamespace>sswindiskutilcore</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">
-    <CharacterSet>Unicode</CharacterSet>
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|Win32'">
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|x64'">
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|Win32'">
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|x64'">
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -52,55 +55,38 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|x64'">
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|Win32'">
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|x64'">
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|Win32'">
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|x64'">
-  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
+      <AdditionalIncludeDirectories>../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>
       </ForcedIncludeFiles>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Message>Copying library to lib dir with canonical name ...</Message>
+      <Command>"$(SolutionDir)projects\scripts\copy_lib.cmd" "$(SolutionDir)projects\support\clcp\clcp.c" "$(TargetPath)" "$(SolutionDir)lib" "$(SolutionDir)include/ss-win-diskutil/version.h" SS_WIN_DISKUTIL_VER_MAJOR "$(Platform)" "$(ConfigurationName)" ss-win-diskutil core</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|Win32'">
-    <Link>
-      <EntryPointSymbol>wmainCRTStartup</EntryPointSymbol>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|x64'">
-    <Link>
-      <EntryPointSymbol>wmainCRTStartup</EntryPointSymbol>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|Win32'">
-    <Link>
-      <EntryPointSymbol>wmainCRTStartup</EntryPointSymbol>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|x64'">
-    <Link>
-      <EntryPointSymbol>wmainCRTStartup</EntryPointSymbol>
-    </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\entry.c" />
-    <ClCompile Include="..\implicit_link.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\include\ss-win-diskutil.h" />
-    <ClInclude Include="..\..\..\include\ss-win-diskutil\implicit_link.h" />
-    <ClInclude Include="..\..\..\include\ss-win-diskutil\version.h" />
-    <ClInclude Include="..\..\..\include\ss-win-diskutil\volumes.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\win.volumes.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\ss-win-diskutil.h" />
+    <ClInclude Include="..\..\..\include\ss-win-diskutil\version.h" />
+    <ClInclude Include="..\..\..\include\ss-win-diskutil\volumes.h" />
+  </ItemGroup>
 </Project>

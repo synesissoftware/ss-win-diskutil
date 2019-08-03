@@ -67,7 +67,7 @@ int wmain(int argc, wchar_t* argv[])
     {
         size_t j;
 
-        fwprintf(stdout, L"%lu volume(s)\n", volumes->numVolumes);
+        fwprintf(stdout, L"%I64u volume(s)\n", volumes->numVolumes);
 
         for (j = 0; volumes->numVolumes != j; ++j)
         {
@@ -76,7 +76,7 @@ int wmain(int argc, wchar_t* argv[])
             fwprintf(
                 stdout
             ,   L"%lu: id=%.*s label=\"%.*s\" free=%I64u capacity=%I64u\n"
-            ,   j
+            ,   (unsigned int)j
             ,   (int)volume->id.len, volume->id.ptr
             ,   (int)volume->friendlyName.len, volume->friendlyName.ptr
             ,   volume->callerFreeBytes

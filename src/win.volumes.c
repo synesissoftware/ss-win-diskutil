@@ -498,10 +498,10 @@ internal_append_(
                                                     +   sizeof(internal_descriptor_t) * (newCap - 1)
                                                     ;
     internal_descriptor_t* const        pVolL       =   &current->volumes[currN - 1];
-    internal_descriptor_t* const        pVolN       =   &current->volumes[currCap];
+    internal_descriptor_t* const        pVolC       =   &current->volumes[currCap];
     size_t const                        cbCurrText  =   0
                                                     +   (char*)(pVolL->friendlyName.ptr + pVolL->friendlyName.len + 1)
-                                                    -   (char*)pVolN
+                                                    -   (char*)pVolC
                                                     ;
     size_t                              cbNewText   =   0
                                                     +   sizeof(wchar_t) * (1 + cchId)

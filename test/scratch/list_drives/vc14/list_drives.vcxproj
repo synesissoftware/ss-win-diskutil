@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug Multithreaded|Win32">
       <Configuration>Debug Multithreaded</Configuration>
@@ -19,22 +19,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F373E5AF-79D6-4297-92A2-A28EE764D9C2}</ProjectGuid>
+    <ProjectGuid>{C030E861-9F05-494C-827E-448DF284C057}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>list_volumes</RootNamespace>
+    <RootNamespace>list_drives</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">
-    <CharacterSet>Unicode</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|Win32'">
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|x64'">
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|Win32'">
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|x64'">
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -62,43 +65,38 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <ForcedIncludeFiles>
-      </ForcedIncludeFiles>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|Win32'">
-    <Link>
-      <EntryPointSymbol>wmainCRTStartup</EntryPointSymbol>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|x64'">
-    <Link>
-      <EntryPointSymbol>wmainCRTStartup</EntryPointSymbol>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|Win32'">
-    <Link>
-      <EntryPointSymbol>wmainCRTStartup</EntryPointSymbol>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|x64'">
-    <Link>
-      <EntryPointSymbol>wmainCRTStartup</EntryPointSymbol>
-    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\entry.c" />
-    <ClCompile Include="..\implicit_link.c" />
+    <ClInclude Include="..\..\..\..\include\ss-win-diskutil.h" />
+    <ClInclude Include="..\..\..\..\include\ss-win-diskutil\implicit_link.h" />
+    <ClInclude Include="..\..\..\..\include\ss-win-diskutil\version.h" />
+    <ClInclude Include="..\..\..\..\include\ss-win-diskutil\volumes.h" />
+    <ClInclude Include="..\pch.hpp" />
+    <ClInclude Include="..\_dev_pragmatics_\warnings.msvc.10+.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\ss-win-diskutil.h" />
-    <ClInclude Include="..\..\..\include\ss-win-diskutil\implicit_link.h" />
-    <ClInclude Include="..\..\..\include\ss-win-diskutil\version.h" />
-    <ClInclude Include="..\..\..\include\ss-win-diskutil\volumes.h" />
+    <ClCompile Include="..\diagnostics.cpp" />
+    <ClCompile Include="..\entry.cpp" />
+    <ClCompile Include="..\implicit_link.cpp" />
+    <ClCompile Include="..\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Multithreaded|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
