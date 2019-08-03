@@ -24,7 +24,48 @@ T.B.C.
 
 ## Examples
 
-T.B.C.
+```C
+
+#include <ss-win-diskutil.h>
+
+. . .
+
+    SSWinDiskUtil_VolumeDescriptions_t  volumes;
+
+    if (0 == SSWinDiskUtil_LoadVolumes(NULL, 0, &volumes))
+    {
+        LONG const le = GetLastError();
+
+        fwprintf(stderr, L"%s: failed to load volumes: %d\n", bn, le);
+
+        return EXIT_FAILURE;
+    }
+    else
+    {
+        size_t j;
+
+        fwprintf(stdout, L"%lu volume(s)\n", volumes->numVolumes);
+
+        for (j = 0; volumes->numVolumes != j; ++j)
+        {
+            SSWinDiskUtil_VolumeDescriptor_t const* const volume = &volumes->volumes[j];
+
+            fwprintf(
+                stdout
+            ,   L"%lu: id=%.*s label=\"%.*s\" free=%I64u capacity=%I64u\n"
+            ,   j
+            ,   (int)volume->id.len, volume->id.ptr
+            ,   (int)volume->friendlyName.len, volume->friendlyName.ptr
+            ,   volume->callerFreeBytes
+            ,   volume->capacityBytes
+            );
+        }
+
+        SSWinDiskUtil_ReleaseVolumes(NULL, volumes);
+
+        return EXIT_SUCCESS;
+    }
+```
 
 ## Project Information
 
