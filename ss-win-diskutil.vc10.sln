@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{687CA74B-01C8-4616-B7AC-075DEF03A914}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{4AB9A3E7-9552-48EE-B735-56E0AA35FF0D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ss-win-diskutil.core.vc10", "projects\core\vc10\ss-win-diskutil.core.vcxproj", "{13D12A81-AB7D-40F4-ADC2-D32DCD62FC40}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ss-win-diskutil.core", "projects\core\vc10\ss-win-diskutil.core.vcxproj", "{13D12A81-AB7D-40F4-ADC2-D32DCD62FC40}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{91C90528-1ACA-409C-8B09-DD427A0A05F3}"
 	ProjectSection(SolutionItems) = preProject
