@@ -67,6 +67,21 @@ T.B.C.
     }
 ```
 
+which gives results such as
+
+```
+9 volume(s)
+0: id=\\?\Volume{54ba6bcd-4986-11e4-9ae4-806e6f6e6963}\ label="System" free=10848309248 capacity=53686366208
+1: id=\\?\Volume{48a35c3c-4934-11e4-94a7-001c427f1a4e}\ label="Dev" free=8254717952 capacity=17182609408
+2: id=\\?\Volume{5e0afee6-49d8-11e4-b415-001c427f1a4e}\ label="Programs" free=44040654848 capacity=53694623744
+3: id=\\?\Volume{6827c7e0-4b47-11e4-8a10-001c42459f86}\ label="spare" free=1069277184 capacity=1077477376
+4: id=\\?\Volume{6827c7e4-4b47-11e4-8a10-001c42459f86}\ label="spare" free=1069277184 capacity=1077477376
+5: id=\\?\Volume{6827c7e8-4b47-11e4-8a10-001c42459f86}\ label="spare" free=1069277184 capacity=1077477376
+6: id=\\?\Volume{6827c7ec-4b47-11e4-8a10-001c42459f86}\ label="spare" free=1069277184 capacity=1077477376
+7: id=\\?\Volume{8c7371b8-62df-11e4-967e-001c42459f86}\ label="unused" free=8516808704 capacity=8562483200
+8: id=\\?\Volume{54ba6bca-4986-11e4-9ae4-806e6f6e6963}\ label="" free=8516808704 capacity=8562483200
+```
+
 ## Project Information
 
 ### Where to get help
