@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{1769
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "support", "support", "{2EAE4395-0CDE-4AFF-89F0-05DA09B6BDB8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clcp", "projects\support\clcp\clcp.vcxproj", "{9656C7A4-9DAC-4808-A6EA-68A27406844B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clcp", "projects\support\clcp\vc10\clcp.vcxproj", "{9656C7A4-9DAC-4808-A6EA-68A27406844B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vcprops", "vcprops", "{09EF9C83-A34F-451A-A416-4BB7EE44ED35}"
 	ProjectSection(SolutionItems) = preProject

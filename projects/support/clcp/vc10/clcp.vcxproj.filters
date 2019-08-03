@@ -11,7 +11,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="clcp.c">
+    <ClCompile Include="..\clcp.c">
       <Filter>Module Files</Filter>
     </ClCompile>
   </ItemGroup>
