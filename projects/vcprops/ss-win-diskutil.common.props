@@ -127,7 +127,7 @@
 		</ClCompile>
 	</ItemDefinitionGroup>
 
-	<ItemDefinitionGroup Condition="$(Configuration.Contains('Debug Multithreaded DLL'))">
+	<ItemDefinitionGroup Condition="$(Configuration.Contains('Debug Multithreaded DLL')) OR $(Configuration.Contains('Debug Multithreaded Dll'))">
 		<ClCompile>
 			<RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
 		</ClCompile>
@@ -159,7 +159,7 @@
 		</ClCompile>
 	</ItemDefinitionGroup>
 
-	<ItemDefinitionGroup Condition="$(Configuration.Contains('Release Multithreaded DLL'))">
+	<ItemDefinitionGroup Condition="$(Configuration.Contains('Release Multithreaded DLL')) OR $(Configuration.Contains('Release Multithreaded Dll'))">
 		<ClCompile>
 			<RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
 		</ClCompile>
