@@ -1,5 +1,5 @@
 
-#pragma comment(lib, "ss-win-diskutil.core.vc10.lib")
+#include <ss-win-diskutil/implicit_link.h>
 
 #include <fastformat/implicit_link.h>
 

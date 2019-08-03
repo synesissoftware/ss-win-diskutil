@@ -61,6 +61,10 @@
     <Link>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PostBuildEvent>
+      <Message>Copying library to lib dir with canonical name ...</Message>
+      <Command>"$(SolutionDir)projects\scripts\copy_lib.cmd" "$(SolutionDir)projects\support\clcp\clcp.c" "$(TargetPath)" "$(SolutionDir)lib" "$(SolutionDir)include/ss-win-diskutil/version.h" SS_WIN_DISKUTIL_VER_MAJOR "$(Platform)" "$(ConfigurationName)" ss-win-diskutil core</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Multithreaded|Win32'">
   </ItemDefinitionGroup>

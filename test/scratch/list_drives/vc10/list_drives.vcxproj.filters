@@ -37,6 +37,9 @@
     <ClInclude Include="..\..\..\..\include\ss-win-diskutil.h">
       <Filter>Header Files\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\include\ss-win-diskutil\implicit_link.h">
+      <Filter>Header Files\include\ss-win-diskutil</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\..\include\ss-win-diskutil\version.h">
       <Filter>Header Files\include\ss-win-diskutil</Filter>
     </ClInclude>

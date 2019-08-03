@@ -43,9 +43,9 @@
  * includes
  */
 
-#include <stdint.h>
-
 #include <ss-win-diskutil/volumes.h>
+
+#include <stdint.h>
 
 #include <windows.h>
 
@@ -74,8 +74,6 @@ typedef SSWinDiskUtil_VolumeDescriptions_t      internal_descriptions_t;
  * constants
  */
 
-#define NUM_ELEMENTS_(ar)               (sizeof(ar) / sizeof(0[ar]))
-
 #define CCH_VOLID_                      (MAX_PATH)
 #define CCH_VOLLABEL_                   (MAX_PATH)
 
@@ -86,6 +84,8 @@ static char const s_guard[8] = { '~', '~', '~', '~', '~', '~', '~', '~', };
 /* /////////////////////////////////////////////////////////////////////////
  * macros
  */
+
+#define NUM_ELEMENTS_(ar)               (sizeof(ar) / sizeof(0[ar]))
 
 /* /////////////////////////////////////////////////////////////////////////
  * helper function declarations

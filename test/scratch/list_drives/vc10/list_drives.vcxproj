@@ -77,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\include\ss-win-diskutil.h" />
+    <ClInclude Include="..\..\..\..\include\ss-win-diskutil\implicit_link.h" />
     <ClInclude Include="..\..\..\..\include\ss-win-diskutil\version.h" />
     <ClInclude Include="..\..\..\..\include\ss-win-diskutil\volumes.h" />
     <ClInclude Include="..\pch.hpp" />

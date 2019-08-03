@@ -63,7 +63,11 @@
 
 			<BrowseInformation>true</BrowseInformation>
 			<CompileAsManaged>false</CompileAsManaged>
-			<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+
+			<!-- Use C7 so don't have to worry about PDB file locations -->
+			<!--<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>-->
+			<DebugInformationFormat>OldStyle</DebugInformationFormat>
+
 			<EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
 			<ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
 			<ForcedIncludeFiles>pch.hpp</ForcedIncludeFiles>
@@ -96,7 +100,11 @@
 			<AdditionalDependencies>odbc32.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<AdditionalDependencies>kernel32.lib;%(AdditionalDependencies)</AdditionalDependencies>
 			<AdditionalDependencies>DbgHelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+
 			<AdditionalLibraryDirectories Condition="'$(JUSTTHREAD_ROOT)' != '' AND exists('$(JUSTTHREAD_ROOT)/lib')">$(JUSTTHREAD_ROOT)/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+
+			<AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<SubSystem>Console</SubSystem>
 		</Link>
@@ -111,7 +119,7 @@
 		<ClCompile>
 			<InlineFunctionExpansion>Default</InlineFunctionExpansion>
 			<IntrinsicFunctions>false</IntrinsicFunctions>
-			<MinimalRebuild>true</MinimalRebuild>
+			<MinimalRebuild>false</MinimalRebuild>
 			<Optimization>Disabled</Optimization>
 			<PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
