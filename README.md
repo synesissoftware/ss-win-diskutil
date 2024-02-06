@@ -1,4 +1,4 @@
-# ss-win-diskutil
+# ss-win-diskutil <!-- omit in toc -->
 **S**ynesis **S**oftware **Disk** **Util**ity library, for **Win**dows
 
 ## Introduction
@@ -7,20 +7,107 @@
 
 It has **no dependencies** on any other non-standard library.
 
-## Table of Contents
+## Table of Contents <!-- omit in toc -->
 
-1. [Introduction](#introduction)
-2. [Installation](#installation)
-3. [Components](#components)
-4. [Project Information](#project-information)
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Components](#components)
+- [Examples](#examples)
+- [Project Information](#project-information)
+  - [Where to get help](#where-to-get-help)
+  - [Contribution guidelines](#contribution-guidelines)
+  - [License](#license)
 
 ## Installation
 
-T.B.C.
+No installation instructions are provided at this time.
 
 ## Components
 
-T.B.C.
+```C
+/** String slice type
+ *
+ * @note A string slice type such as this is not required to refer to a
+ *   nul-terminated C-style string. Refer to the documentation of the
+ *   particular construct to inform whether the use(s) involve
+ *   nul-terminated strings
+ */
+struct SSWinDiskUtil_slice_w_t
+{
+    size_t                              len;    /*!< The length of the string */
+    wchar_t const*                      ptr;    /*!< Pointer to the first character of the string */
+};
+#ifndef __cplusplus
+typedef struct SSWinDiskUtil_slice_w_t                      SSWinDiskUtil_slice_w_t;
+#endif /* !__cplusplus */
+
+struct SSWinDiskUtil_VolumeDescriptor_t
+{
+    SSWinDiskUtil_slice_w_t             id;                 /*!< The volume identifier */
+    SSWinDiskUtil_slice_w_t             friendlyName;       /*!< The volume friendly name */
+    SSWinDiskUtil_slice_w_t             reserved0[5];
+    uint64_t                            capacityBytes;      /*!< The volume capacity */
+    uint64_t                            systemFreeBytes;    /*!< The volume free-space */
+    uint64_t                            callerFreeBytes;    /*!< The volume free-space as available to the caller */
+    uint64_t                            statusFlags;        /*!< Status flags */
+};
+#ifndef __cplusplus
+typedef struct SSWinDiskUtil_VolumeDescriptor_t             SSWinDiskUtil_VolumeDescriptor_t;
+#endif /* !__cplusplus */
+
+/** Volume descriptors structure
+ *
+ */
+struct SSWinDiskUtil_VolumeDescriptors_t
+{
+    uint64_t                            numVolumes;         /*!< The number of volumes */
+    SSWinDiskUtil_VolumeDescriptor_t    volumes[1];         /*!< The array of volumes, of the size [numVolumes] */
+};
+#ifndef __cplusplus
+typedef struct SSWinDiskUtil_VolumeDescriptors_t            SSWinDiskUtil_VolumeDescriptors_t;
+#endif /* !__cplusplus */
+
+/** Volume descriptions handle
+ *
+ */
+typedef SSWinDiskUtil_VolumeDescriptors_t const*            SSWinDiskUtil_VolumeDescriptions_t;
+
+
+
+
+/** Obtains the volumes information for the host
+ *
+ * @param reserved [in] (void*) Reserved. Must be \c nullptr
+ * @param flags [in] (int64_t) Flags. Currently must be \c 0
+ * @param pvolumes [out] Pointer to handle (of type
+ *   \c SSWinDiskUtil_VolumeDescriptions_t, which is
+ *   <code>SSWinDiskUtil_VolumeDescriptors_t const*</code), to receive the
+ *   volumes information. Must NOT be \c nullptr
+ *
+ * @retval 0 The function failed. Use GetLastError() for further information
+ * @retval >0 The number of volumes for which information is obtained
+ */
+int
+SSWinDiskUtil_LoadVolumes(
+    void*                                   reserved
+,   int64_t                                 flags
+,   SSWinDiskUtil_VolumeDescriptions_t*     pvolumes
+);
+
+/** Releases all resources associated with the volumes
+ *
+ * @param reserved [in] (void*) Reserved. Must be \c nullptr
+ * @param volumes [in] The descriptions handle
+ *
+ * @retval 0
+ */
+int
+SSWinDiskUtil_ReleaseVolumes(
+    void*                                   reserved
+,   SSWinDiskUtil_VolumeDescriptions_t      volumes
+);
+
+```
 
 ## Examples
 
@@ -92,11 +179,10 @@ which gives results such as
 
 Defect reports, feature requests, and pull requests are welcome on https://github.com/synesissoftware/ss-win-diskutil.
 
-### Related projects
-
-T.B.C.
-
 ### License
 
 **ss-win-diskutil** is released under the 3-clause BSD license. See [LICENSE](./LICENSE) for details.
+
+
+<!-- ########################### end of file ########################### -->
 

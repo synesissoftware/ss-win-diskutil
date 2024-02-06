@@ -4,10 +4,11 @@
  * Purpose: Synesis Software Disk Utility library, for Windows: Volumes API.
  *
  * Created: 4th April 2019
- * Updated: 5th August 2019
+ * Updated: 6th February 2024
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -49,6 +50,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * types
  */
@@ -62,8 +64,8 @@
  */
 struct SSWinDiskUtil_slice_w_t
 {
-    size_t                      len;    /*!< The length of the string */
-    wchar_t const*              ptr;    /*!< Pointer to the first character of the string */
+    size_t                              len;    /*!< The length of the string */
+    wchar_t const*                      ptr;    /*!< Pointer to the first character of the string */
 };
 #ifndef __cplusplus
 typedef struct SSWinDiskUtil_slice_w_t                      SSWinDiskUtil_slice_w_t;
@@ -99,6 +101,7 @@ typedef struct SSWinDiskUtil_VolumeDescriptors_t            SSWinDiskUtil_Volume
  *
  */
 typedef SSWinDiskUtil_VolumeDescriptors_t const*            SSWinDiskUtil_VolumeDescriptions_t;
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -145,6 +148,7 @@ SSWinDiskUtil_ReleaseVolumes(
 } /* extern "C" */
 #endif
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
  */
@@ -156,6 +160,7 @@ namespace Windows {
 namespace DiskUtil {
 #endif /* __cplusplus */
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * C++ types
  */
@@ -166,6 +171,7 @@ typedef SSWinDiskUtil_VolumeDescriptor_t                    VolumeDescriptor_t;
 
 typedef SSWinDiskUtil_VolumeDescriptions_t                  VolumeDescriptions_t;
 #endif /* __cplusplus */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions (C++)
@@ -201,6 +207,7 @@ ReleaseVolumes(
 }
 #endif /* __cplusplus */
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * namespace
  */
@@ -210,6 +217,7 @@ ReleaseVolumes(
 } /* namespace Windows */
 } /* namespace SynesisSoftware */
 #endif /* __cplusplus */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * STLSoft string access shims
@@ -238,6 +246,7 @@ namespace stlsoft
 
 } /* namespace stlsoft */
 #endif /* __cplusplus */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * inclusion control

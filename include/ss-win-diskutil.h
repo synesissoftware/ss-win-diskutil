@@ -4,10 +4,11 @@
  * Purpose: Synesis Software Disk Utility library, for Windows.
  *
  * Created: 2nd August 2019
- * Updated: 2nd August 2019
+ * Updated: 6th February 2024
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -48,6 +49,7 @@
 
 #include "./ss-win-diskutil/version.h"
 #include "./ss-win-diskutil/volumes.h"
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * inclusion control

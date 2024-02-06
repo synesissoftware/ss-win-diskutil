@@ -179,3 +179,6 @@ show_usage(
     fwprintf(stm, L"USAGE: %s { --help | [ --label ] [ --spaces ] }\n", bn);
 }
 
+
+/* ///////////////////////////// end of file //////////////////////////// */
+

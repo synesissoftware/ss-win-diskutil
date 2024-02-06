@@ -5,10 +5,11 @@
  *          link.
  *
  * Created: 2nd August 2019
- * Updated: 2nd August 2019
+ * Updated: 6th February 2024
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -49,17 +50,19 @@
 
 #include <ss-win-diskutil/version.h>
 
+
 /* /////////////////////////////////////////////////////////////////////////
- * Macros and definitions
+ * macros and definitions
  */
 
 #ifndef SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION
-# define SS_WIN_DISKUTIL_STRINGIZE_(x)       #x
-# define SS_WIN_DISKUTIL_STRINGIZE(x)        SS_WIN_DISKUTIL_STRINGIZE_(x)
+# define SS_WIN_DISKUTIL_STRINGIZE_(x)                      #x
+# define SS_WIN_DISKUTIL_STRINGIZE(x)                       SS_WIN_DISKUTIL_STRINGIZE_(x)
 #endif /* !SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION */
 
+
 /* /////////////////////////////////////////////////////////////////////////
- * Architecture discrimination
+ * architecture discrimination
  */
 
 #if defined(__amd64__) || \
@@ -80,8 +83,9 @@
 # define SS_WIN_DISKUTIL_ARCH_IS_X86
 #endif /* _M_?? */
 
+
 /* /////////////////////////////////////////////////////////////////////////
- * Implicit linking
+ * implicit linking
  */
 
 #if defined(_WIN32) || \
@@ -89,8 +93,8 @@
 
  /* architecture */
 # if !defined(SS_WIN_DISKUTIL_ARCH_IS_X86) && \
-	 !defined(SS_WIN_DISKUTIL_ARCH_IS_X64) && \
-	 !defined(SS_WIN_DISKUTIL_ARCH_IS_IA64)
+     !defined(SS_WIN_DISKUTIL_ARCH_IS_X64) && \
+     !defined(SS_WIN_DISKUTIL_ARCH_IS_IA64)
 
   /* see if using PlatformSTL */
 #  ifdef PLATFORMSTL_OS_IS_WINDOWS
@@ -237,6 +241,15 @@
 #    define SS_WIN_DISKUTIL_IMPL_LINK_COMPILER_NAME         "vc12"
 #   elif _MSC_VER == 1900
 #    define SS_WIN_DISKUTIL_IMPL_LINK_COMPILER_NAME         "vc14"
+#   elif _MSC_VER >= 1910
+#    if 0
+#    elif _MSC_VER < 1920
+#     define SS_WIN_DISKUTIL_IMPL_LINK_COMPILER_NAME        "vc15"
+#    elif _MSC_VER <= 1929
+#     define SS_WIN_DISKUTIL_IMPL_LINK_COMPILER_NAME        "vc16"
+#    else
+#     error Visual C++ version that is >= vc16 is not recognised
+#    endif
 #   else /* ? _MSC_VER */
 #    error Visual C++ version not supported
 #   endif /* _MSC_VER */
@@ -334,6 +347,7 @@
 # endif /* SS_WIN_DISKUTIL_IMPLICIT_LINK_SUPPORT */
 
 #endif /* Win-32 || Win-64 */
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * inclusion control

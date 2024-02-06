@@ -3,14 +3,14 @@
 SETLOCAL ENABLEEXTENSIONS ENABLEDELAYEDEXPANSION
 IF ERRORLEVEL 1 (
 
-	ECHO %~nx0: Requires Command extensions and delayed-expansion
+    ECHO %~nx0: Requires Command extensions and delayed-expansion
 
-	EXIT /B 1
+    EXIT /B 1
 )
 
 IF {%7} == {} (
 
-	GOTO :usage
+    GOTO :usage
 )
 
 SET ScriptDir=%~dp0
@@ -35,7 +35,7 @@ SET ProjectSubname=%~9
 
 REM ECHO.
 REM ECHO ClcpSourcePath="%ClcpSourcePath%"
-REM 
+REM
 REM ECHO.
 REM ECHO TargetPath="%TargetPath%"
 REM ECHO TargetLibDir="%TargetLibDir%"
@@ -50,8 +50,8 @@ REM ECHO ProjectSubname="%ProjectSubname%"
 
 IF EXIST "%ClcpExePath%" (
 
-	REM ECHO Deleting ^"%ClcpExePath%^"
-	DEL /F "%ClcpExePath%"
+    REM ECHO Deleting ^"%ClcpExePath%^"
+    DEL /F "%ClcpExePath%"
 )
 
 REM ECHO.
@@ -60,9 +60,9 @@ REM ECHO cl.exe -nologo -DNDEBUG -W4 "%ClcpSourcePath%" -Fe"%ClcpExePath%"
 cl.exe -nologo -DNDEBUG -W4 "%ClcpSourcePath%" -Fe"%ClcpExePath%" >NUL
 IF ERRORLEVEL 1 (
 
-	ECHO %~nx0: Failed to compile create-library-copy-program
+    ECHO %~nx0: Failed to compile create-library-copy-program
 
-	EXIT /B 1
+    EXIT /B 1
 )
 
 ECHO Executing "%ClcpExePath%" to generate canonical form library in "%TargetLibDir%"

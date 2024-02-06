@@ -5,10 +5,11 @@
  *          library-copy-program
  *
  * Created: 2nd August 2019
- * Updated: 3rd August 2019
+ * Updated: 6th February 2024
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -51,6 +52,7 @@
 # pragma warning(disable : 4996)
 #endif
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
@@ -60,6 +62,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * helper function declarations
@@ -77,6 +80,7 @@ find_ver_major(
     char const* versionFile
 ,   char const* versionSymbol
 );
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * main()
@@ -251,6 +255,7 @@ int main(int argc, char* argv[])
     }
 }
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * helper function definitions
  */
@@ -262,7 +267,7 @@ find_ver_major(
 ,   char const* versionSymbol
 )
 {
-    FILE*   f = fopen(versionFile, "r");
+    FILE* f = fopen(versionFile, "r");
 
     if (NULL != f)
     {
@@ -335,6 +340,7 @@ basename(
         }
     }
 }
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 

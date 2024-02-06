@@ -4,10 +4,11 @@
  * Purpose: Synesis Software Disk Utility library, for Windows: Volumes API.
  *
  * Created: 4th April 2019
- * Updated: 2nd August 2019
+ * Updated: 6th February 2024
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
+ * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -71,19 +72,19 @@
  * types
  */
 
-typedef SSWinDiskUtil_slice_w_t                 internal_slice_t;
-typedef SSWinDiskUtil_VolumeDescriptor_t        internal_descriptor_t;
-typedef SSWinDiskUtil_VolumeDescriptors_t       internal_descriptors_t;
-typedef SSWinDiskUtil_VolumeDescriptions_t      internal_descriptions_t;
+typedef SSWinDiskUtil_slice_w_t                             internal_slice_t;
+typedef SSWinDiskUtil_VolumeDescriptor_t                    internal_descriptor_t;
+typedef SSWinDiskUtil_VolumeDescriptors_t                   internal_descriptors_t;
+typedef SSWinDiskUtil_VolumeDescriptions_t                  internal_descriptions_t;
 
 /* /////////////////////////////////////////////////////////////////////////
  * constants
  */
 
-#define CCH_VOLID_                      (MAX_PATH)
-#define CCH_VOLLABEL_                   (MAX_PATH)
+#define CCH_VOLID_                                          (MAX_PATH)
+#define CCH_VOLLABEL_                                       (MAX_PATH)
 
-#define CAP_JUMP_                       (8)
+#define CAP_JUMP_                                           (8)
 
 static char const s_guard[8] = { '~', '~', '~', '~', '~', '~', '~', '~', };
 
@@ -91,15 +92,15 @@ static char const s_guard[8] = { '~', '~', '~', '~', '~', '~', '~', '~', };
  * macros
  */
 
-#define NUM_ELEMENTS_(ar)               (sizeof(ar) / sizeof(0[ar]))
+#define NUM_ELEMENTS_(ar)                                   (sizeof(ar) / sizeof(0[ar]))
 
 #if 0
 #elif defined(_MSC_VER)
 
-# define SSWDUV_ASSERT_                 _ASSERTE
+# define SSWDUV_ASSERT_                                     _ASSERTE
 #else
 
-# define SSWDUV_ASSERT_                 assert
+# define SSWDUV_ASSERT_                                     assert
 #endif
 
 
@@ -183,6 +184,7 @@ uint64_t
 external_n_(
     uint64_t    numVolumes
 );
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * API functions
@@ -279,6 +281,7 @@ SSWinDiskUtil_ReleaseVolumes(
 
     return 0;
 }
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * helper function definitions
@@ -696,6 +699,7 @@ internal_FindNextVolume_(
 
     return b;
 }
+
 
 /* ///////////////////////////// end of file //////////////////////////// */
 
