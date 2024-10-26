@@ -4,7 +4,7 @@
  * Purpose: Synesis Software Disk Utility library, for Windows: Volumes API.
  *
  * Created: 4th April 2019
- * Updated: 6th February 2024
+ * Updated: 26th October 2024
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
@@ -60,6 +60,7 @@
 # include <assert.h>
 #endif
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * compatibility
  */
@@ -67,6 +68,7 @@
 #ifndef _WIN32
 # error Requires Windows
 #endif
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * types
@@ -87,6 +89,7 @@ typedef SSWinDiskUtil_VolumeDescriptions_t                  internal_description
 #define CAP_JUMP_                                           (8)
 
 static char const s_guard[8] = { '~', '~', '~', '~', '~', '~', '~', '~', };
+
 
 /* /////////////////////////////////////////////////////////////////////////
  * macros

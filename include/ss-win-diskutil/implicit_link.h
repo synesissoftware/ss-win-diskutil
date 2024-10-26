@@ -5,7 +5,7 @@
  *          link.
  *
  * Created: 2nd August 2019
- * Updated: 6th February 2024
+ * Updated: 26th October 2024
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
@@ -247,6 +247,8 @@
 #     define SS_WIN_DISKUTIL_IMPL_LINK_COMPILER_NAME        "vc15"
 #    elif _MSC_VER <= 1929
 #     define SS_WIN_DISKUTIL_IMPL_LINK_COMPILER_NAME        "vc16"
+#    elif _MSC_VER <= 1941
+#     define SS_WIN_DISKUTIL_IMPL_LINK_COMPILER_NAME        "vc17"
 #    else
 #     error Visual C++ version that is >= vc16 is not recognised
 #    endif

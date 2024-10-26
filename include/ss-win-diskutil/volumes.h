@@ -4,7 +4,7 @@
  * Purpose: Synesis Software Disk Utility library, for Windows: Volumes API.
  *
  * Created: 4th April 2019
- * Updated: 6th February 2024
+ * Updated: 26th October 2024
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
@@ -224,6 +224,7 @@ ReleaseVolumes(
  */
 
 #ifdef __cplusplus
+
 namespace stlsoft
 {
     inline
