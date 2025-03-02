@@ -136,9 +136,6 @@ if [ $status -eq 0 ]; then
       echo "executing $f:"
     fi
 
-    echo
-    echo "executing $f:"
-
     # NOTE: we do not break on fail because these tests are not always intended to succeed
     $f
   done
