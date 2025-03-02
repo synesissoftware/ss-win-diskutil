@@ -4,11 +4,11 @@
  * Purpose: Synesis Software Disk Utility library, for Windows: Volumes API.
  *
  * Created: 4th April 2019
- * Updated: 26th October 2024
+ * Updated: 2nd February 2025
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
- * Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -88,7 +88,11 @@ typedef SSWinDiskUtil_VolumeDescriptions_t                  internal_description
 
 #define CAP_JUMP_                                           (8)
 
+#ifndef NDEBUG
+
 static char const s_guard[8] = { '~', '~', '~', '~', '~', '~', '~', '~', };
+#endif
+
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -185,7 +189,7 @@ internal_FindNextVolume_(
 static
 uint64_t
 external_n_(
-    uint64_t    numVolumes
+    uint64_t                numVolumes
 );
 
 
@@ -202,9 +206,9 @@ SSWinDiskUtil_LoadVolumes(
 {
     WCHAR       volId[CCH_VOLID_ + 1];
     WCHAR       volLabel[CCH_VOLLABEL_ + 1];
-    uint64_t    capacityBytes;
-    uint64_t    systemFreeBytes;
-    uint64_t    callerFreeBytes;
+    uint64_t    capacityBytes   =   0;
+    uint64_t    systemFreeBytes =   0;
+    uint64_t    callerFreeBytes =   0;
     HANDLE      h;
 
     if (NULL != reserved)
@@ -540,10 +544,13 @@ internal_append_(
                                                     +   cbText
                                                     +   cbGuard
                                                     ;
-    internal_descriptors_t*  p           =   (internal_descriptors_t*)internal_reallocate_(current, cb);
+    intptr_t const                      curr_addr   =   (intptr_t)current;
+    internal_descriptors_t* const       p           =   (internal_descriptors_t*)internal_reallocate_(current, cb);
 
     if (NULL != p)
     {
+        intptr_t const                  p_addr      =   (intptr_t)p;
+        ptrdiff_t const                 d_addr      =   p_addr - curr_addr;
         internal_descriptor_t* const    pVolN       =   &p->volumes[currN];
         void* const                     pGuard      =   (char*)p + (cb - cbGuard);
         wchar_t*                        pCurrText   =   (wchar_t*)(&p->volumes[currCap]);
@@ -565,7 +572,7 @@ internal_append_(
 
         if (current != p || newCap != currCap)
         {
-            ptrdiff_t const                 d       =   (char*)p - (char*)current + (newCap - currCap) * sizeof(0[pVolN]);
+            ptrdiff_t const                 d       =   d_addr + (newCap - currCap) * sizeof(0[pVolN]);
             internal_descriptor_t*          vol     =   &p->volumes[0];
             size_t                          i;
 
