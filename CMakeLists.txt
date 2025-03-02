@@ -64,6 +64,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
+if(MINGW)
+
+	add_link_options("-municode")
+endif(MINGW)
+
 if(MSVC)
 
 	if(MSVC_VERSION LESS 1930)
@@ -213,7 +218,7 @@ endif(BUILD_TESTING)
 #    otherwise
 # 4. we abort
 
-if(BUILD_TESTING)
+if(BUILD_TESTING OR BUILD_EXAMPLES)
 
 	if(DEFINED STLSOFT)
 
@@ -238,7 +243,7 @@ if(BUILD_TESTING)
 
 		include_directories(${STLSOFT_INCLUDE_DIR})
 	endif()
-endif(BUILD_TESTING)
+endif(BUILD_TESTING OR BUILD_EXAMPLES)
 
 
 # ############################
