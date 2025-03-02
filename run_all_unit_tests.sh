@@ -1,14 +1,16 @@
 #! /bin/bash
 
+ProgramTypeLabel="component and unit test"
+
 ScriptPath=$0
 Dir=$(cd $(dirname "$ScriptPath"); pwd)
 Basename=$(basename "$ScriptPath")
 CMakeDir=${SIS_CMAKE_BUILD_DIR:-$Dir/_build}
 MakeCmd=${SIS_CMAKE_COMMAND:-make}
+Verbosity=${XTESTS_VERBOSITY:-${TEST_VERBOSITY:-3}}
 
 ListOnly=0
 RunMake=1
-Verbosity=3
 
 
 # ##########################################################
@@ -36,7 +38,7 @@ while [[ $# -gt 0 ]]; do
 ss-win-diskutil is a small, independent, C-language open-source library providing disk-related facilities, for Windows
 Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
 Copyright (c) 2019, Matthew Wilson and Synesis Software
-Runs all (matching) component and unit test programs
+Runs all (matching) $ProgramTypeLabel programs
 
 $ScriptPath [ ... flags/options ... ]
 
@@ -53,7 +55,7 @@ Flags/options:
         does not execute CMake and make before running tests
 
     --verbosity <verbosity>
-        specifies an explicit verbosity for the unit-test(s)
+        specifies an explicit verbosity for the $ProgramTypeLabel program(s)
 
 
     standard flags:
@@ -86,7 +88,7 @@ if [ $RunMake -ne 0 ]; then
 
   if [ $ListOnly -eq 0 ]; then
 
-    echo "Executing build (via command \`$MakeCmd\`) and then running all component and unit test programs"
+    echo "Executing build (via command \`$MakeCmd\`) and then running all $ProgramTypeLabel programs"
 
     mkdir -p $CMakeDir || exit 1
 
@@ -109,10 +111,10 @@ if [ $status -eq 0 ]; then
 
   if [ $ListOnly -ne 0 ]; then
 
-    echo "Listing all component and unit test programs"
+    echo "Listing all $ProgramTypeLabel programs"
   else
 
-    echo "Running all component and unit test programs"
+    echo "Running all $ProgramTypeLabel programs"
   fi
 
   for f in $(find $CMakeDir -type f '(' -name 'test_unit*' -o -name 'test.unit.*' -o -name 'test_component*' -o -name 'test.component.*' ')' -exec test -x {} \; -print)

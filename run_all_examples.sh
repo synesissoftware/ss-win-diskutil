@@ -1,10 +1,13 @@
 #! /bin/bash
 
+ProgramTypeLabel="example"
+
 ScriptPath=$0
 Dir=$(cd $(dirname "$ScriptPath"); pwd)
 Basename=$(basename "$ScriptPath")
 CMakeDir=${SIS_CMAKE_BUILD_DIR:-$Dir/_build}
 MakeCmd=${SIS_CMAKE_COMMAND:-make}
+Verbosity=${XTESTS_VERBOSITY:-${TEST_VERBOSITY:-3}}
 
 ListOnly=0
 RunMake=1
@@ -24,13 +27,18 @@ while [[ $# -gt 0 ]]; do
 
       RunMake=0
       ;;
+    --verbosity)
+
+      shift
+      Verbosity=$1
+      ;;
     --help)
 
       cat << EOF
 ss-win-diskutil is a small, independent, C-language open-source library providing disk-related facilities, for Windows
 Copyright (c) 2019-2024, Matthew Wilson and Synesis Information Systems
 Copyright (c) 2003-2019, Matthew Wilson and Synesis Software
-Runs all (matching) example programs
+Runs all (matching) $ProgramTypeLabel programs
 
 $ScriptPath [ ... flags/options ... ]
 
@@ -45,6 +53,9 @@ Flags/options:
     -M
     --no-make
         does not execute CMake and make before running tests
+
+    --verbosity <verbosity>
+        specifies an explicit verbosity for the $ProgramTypeLabel program(s)
 
 
     standard flags:
@@ -77,7 +88,7 @@ if [ $RunMake -ne 0 ]; then
 
   if [ $ListOnly -eq 0 ]; then
 
-    echo "Executing build (via command \`$MakeCmd\`) and then running all example programs"
+    echo "Executing build (via command \`$MakeCmd\`) and then running all $ProgramTypeLabel programs"
 
     mkdir -p $CMakeDir || exit 1
 
@@ -100,10 +111,10 @@ if [ $status -eq 0 ]; then
 
   if [ $ListOnly -ne 0 ]; then
 
-    echo "Listing all example programs"
+    echo "Listing all $ProgramTypeLabel programs"
   else
 
-    echo "Running all example programs"
+    echo "Running all $ProgramTypeLabel programs"
   fi
 
   for f in $(find $CMakeDir -type f '(' -name 'example.*' ')' -exec test -x {} \; -print)
@@ -114,6 +125,15 @@ if [ $status -eq 0 ]; then
       echo "would execute $f:"
 
       continue
+    fi
+
+    if [ $Verbosity -ge 3 ]; then
+
+      echo
+    fi
+    if [ $Verbosity -ge 2 ]; then
+
+      echo "executing $f:"
     fi
 
     echo
