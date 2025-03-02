@@ -5,7 +5,7 @@
 # Purpose:  CMake lists file for libCLImate core library
 #
 # Created:  ...
-# Updated:  26th October 2024
+# Updated:  2nd February 2025
 #
 # ######################################################################## #
 
@@ -65,15 +65,7 @@ target_include_directories(core
 		$<INSTALL_INTERFACE:include>
 )
 
-target_compile_options(core
-	PRIVATE
-		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
-			-Werror -Wall -Wextra -pedantic
-		>
-		$<$<CXX_COMPILER_ID:MSVC>:
-			/WX /W4
-		>
-)
+define_target_compile_options(core)
 
 
 # ##########################################################
