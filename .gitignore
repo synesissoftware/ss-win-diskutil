@@ -1,43 +1,113 @@
 
 # directories (by name)
 
-bin/
-lib/
+/.git-old/
+/.vs/
 
-ipch/
+.svn/
+.tmp_versions/
+
+/_build/
+/_internal/
+
+/bin/
+/ipch/
+/lib/
+
+/doc/
+/dox/
+/ideas/
+/releases/
+/scratch/
+/temp/
+
+/include/b64/
+/include/shwild/
+/include/xcontract/
+/include/xcover/
+/include/xtests/
+
+/src/b64/
+/src/shwild/
+/src/xcontract/
+/src/xcover/
+/src/xtests/
+
+Debug Multithreaded Dll/
+Debug Multithreaded DLL/
+Debug Multithreaded pseudoUnix/
+Debug Multithreaded pseudoUNIX/
+Debug Multithreaded/
+Debug/
+DebugDll/
+DebugDLLUNIX/
+DebugMt/
+DebugUnix/
+Release Multithreaded Dll/
+Release Multithreaded DLL/
+Release Multithreaded pseudoUnix/
+Release Multithreaded pseudoUNIX/
+Release Multithreaded/
+Release/
+ReleaseDll/
+ReleaseDLLUNIX/
+ReleaseMt/
+ReleaseUnix/
+Unicode Debug Multithreaded DLL/
+Unicode Debug Multithreaded/
+Unicode Debug/
+Unicode Release Multithreaded DLL/
+Unicode Release Multithreaded/
+Unicode Release/
+
+TestResults/
+
+vc9/
 
 Win32/
 x64/
 
-Debug/
-Debug Multithreaded/
-Debug Multithreaded DLL/
-Release/
-Release Multithreaded/
-Release Multithreaded DLL/
-
-TestResults/
-
-.tmp_versions/
 
 # directories (by pattern)
+
 
 # files (by name)
 
 .DS_Store
+.ruby-version
+.svnignore
+.svnignore-at-root
+.update_deps
 
+clasp.vc9.sln
+
+dkms.conf
+list_changes.cmd
 Mkfile.old
 Module.symvers
-dkms.conf
 modules.order
+prepare.cmd
+sh.exe.stackdump
+update_deps.cmd
+
+build/makefile.tmpl
+build/makefile.tools.xml
+
 
 # files (by pattern)
 
 *~
+*.???_obj
 *.a
 *.app
+*.aps
+*.b64
+*.bak
 *.bsc
+*.chm
+*.d
 *.dll
+*.dsp
 *.dylib
 *.elf
 *.exe
@@ -45,23 +115,50 @@ modules.order
 *.gch
 *.idb
 *.ilk
+*.iobj
+*.ipch
+*.ipdb
+*.la
+*.lai
 *.lib
+*.lo
+*.log
 *.map
 *.ncb
 *.o
 *.obj
 *.opensdf
 *.opt
+*.org
 *.out
 *.pch
 *.pdb
+*.rar
+*.res
+*.sbr
+*.scc
 *.sdf
+*.slo
 *.so
 *.so.*
 *.suo
 *.swp
+*.tlog
 *.tmp
+*.unsuccessfulbuild
+*.vcproj*.user
+*.vcxproj*.user
+*.xcuserstate
+*.zip
 
-*.vcproj*user
-*.vcxproj*user
+RCa0*
+RCb0*
+
+*.vc71.sln
+*.vc8.sln
+*.vc9.sln
+
+build/*.tmplgen
+build/*.tmpl
+build/*.tools.xml
 

@@ -5,7 +5,7 @@
  *          library-copy-program
  *
  * Created: 2nd August 2019
- * Updated: 6th February 2024
+ * Updated: 26th October 2024
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *

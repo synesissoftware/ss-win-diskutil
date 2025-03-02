@@ -1,11 +1,14 @@
 # ss-win-diskutil <!-- omit in toc -->
+
 **S**ynesis **S**oftware **Disk** **Util**ity library, for **Win**dows
+
 
 ## Introduction
 
 **ss-win-diskutil** is a small, independent, C-language open-source library providing disk-related facilities, for Windows.
 
 It has **no dependencies** on any other non-standard library.
+
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -18,9 +21,11 @@ It has **no dependencies** on any other non-standard library.
   - [Contribution guidelines](#contribution-guidelines)
   - [License](#license)
 
+
 ## Installation
 
 No installation instructions are provided at this time.
+
 
 ## Components
 
@@ -73,8 +78,6 @@ typedef struct SSWinDiskUtil_VolumeDescriptors_t            SSWinDiskUtil_Volume
 typedef SSWinDiskUtil_VolumeDescriptors_t const*            SSWinDiskUtil_VolumeDescriptions_t;
 
 
-
-
 /** Obtains the volumes information for the host
  *
  * @param reserved [in] (void*) Reserved. Must be \c nullptr
@@ -106,13 +109,12 @@ SSWinDiskUtil_ReleaseVolumes(
     void*                                   reserved
 ,   SSWinDiskUtil_VolumeDescriptions_t      volumes
 );
-
 ```
+
 
 ## Examples
 
 ```C
-
 #include <ss-win-diskutil.h>
 
 . . .
@@ -169,15 +171,19 @@ which gives results such as
 8: id=\\?\Volume{54ba6bca-4986-11e4-9ae4-806e6f6e6963}\ label="" free=8516808704 capacity=8562483200
 ```
 
+
 ## Project Information
+
 
 ### Where to get help
 
 [GitHub Page](https://github.com/synesissoftware/ss-win-diskutil "GitHub Page")
 
+
 ### Contribution guidelines
 
 Defect reports, feature requests, and pull requests are welcome on https://github.com/synesissoftware/ss-win-diskutil.
+
 
 ### License
 

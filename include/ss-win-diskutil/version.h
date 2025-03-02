@@ -4,7 +4,7 @@
  * Purpose: Synesis Software Disk Utility library, for Windows: version.
  *
  * Created: 2nd August 2019
- * Updated: 6th February 2024
+ * Updated: 26th October 2024
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
@@ -43,11 +43,10 @@
 #ifndef SS_WIN_DISKUTIL_h_version
 #define SS_WIN_DISKUTIL_h_version
 
+
 /* /////////////////////////////////////////////////////////////////////////
  * includes
  */
-
-#include <stdint.h>
 
 
 /* /////////////////////////////////////////////////////////////////////////
@@ -71,18 +70,22 @@
  */
 
 #ifndef SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION
-# define SS_WIN_DISKUTIL_VER_0_2_1      0x000201ff
-# define SS_WIN_DISKUTIL_VER_0_2_2      0x000202ff
-# define SS_WIN_DISKUTIL_VER_0_2_3      0x000203ff
 
-# define SS_WIN_DISKUTIL_VER            SS_WIN_DISKUTIL_VER_0_2_3
+# define SS_WIN_DISKUTIL_VER_0_2_1          0x000201ff
+# define SS_WIN_DISKUTIL_VER_0_2_2          0x000202ff
+# define SS_WIN_DISKUTIL_VER_0_2_3          0x000203ff
+# define SS_WIN_DISKUTIL_VER_0_2_4_ALPHA1   0x00020441
+# define SS_WIN_DISKUTIL_VER_0_2_4_ALPHA2   0x00020442
+
+# define SS_WIN_DISKUTIL_VER                SS_WIN_DISKUTIL_VER_0_2_4_ALPHA2
 #else /* ? SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION */
-# define SS_WIN_DISKUTIL_VER            0x000202ff
+
+# define SS_WIN_DISKUTIL_VER                0x00020442
 #endif /* !SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION */
 
 #define SS_WIN_DISKUTIL_VER_MAJOR       0
 #define SS_WIN_DISKUTIL_VER_MINOR       2
-#define SS_WIN_DISKUTIL_VER_REVISION    3
+#define SS_WIN_DISKUTIL_VER_REVISION    4
 
 
 /* /////////////////////////////////////////////////////////////////////////
