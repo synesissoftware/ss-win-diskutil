@@ -1,5 +1,5 @@
 
-#include <pantheios/pan.hpp>
+#include <pantheios/pantheios.hpp>
 
 #include <ss-win-diskutil.h>
 
@@ -7,6 +7,7 @@
 #include <fastformat/sinks/iostream.hpp>
 #include <fastformat/ff.hpp>
 
+#include <platformstl/filesystem/path_functions.h>
 #include <stlsoft/conversion/truncation_cast.hpp>
 #include <stlsoft/conversion/w2m.hpp>
 #include <stlsoft/smartptr/scoped_handle.hpp>
@@ -17,6 +18,8 @@
 # include <pantheios/extras/diagutil.hpp>
 #endif
 #include <pantheios/extras/main.hpp>
+#include <pantheios/inserters/integer.hpp>
+#include <pantheios/frontends/fe.simple.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -55,17 +58,49 @@ main_leak_traced(int argc, char* argv[])
 
 static
 int
-main_(int /*argc*/, char* /*argv*/[])
+main_(int argc, char* argv[])
 {
+    bool log_all = false;
+
+    for (int i = 1; i != argc; ++i)
+    {
+        if (0 == ::strcmp("--help", argv[i]))
+        {
+            auto const program_name = platformstl::get_executable_name_from_path(argv[0]);
+
+            ff::fmtln(std::cout, "USAGE: {0} {{ | --help | --log-all }\n", program_name);
+
+            return EXIT_SUCCESS;
+        }
+
+        if (0 == ::strcmp("--log-all", argv[i]))
+        {
+            log_all = true;
+        }
+    }
+
+    if (log_all)
+    {
+        pantheios_fe_simple_setSeverityCeiling(PANTHEIOS_SEV_DEBUG);
+    }
+    else
+    {
+        pantheios_fe_simple_setSeverityCeiling(PANTHEIOS_SEV_ERROR);
+    }
+
     using namespace ::SynesisSoftware::Windows::DiskUtil;
 
     VolumeDescriptions_t volumes;
+
+    pantheios::log_NOTICE("loading volumes ...");
 
     int r = LoadVolumes(0, &volumes);
 
     if (0 != r)
     {
         stlsoft::scoped_handle<VolumeDescriptions_t> scoper(volumes, ReleaseVolumes);
+
+        pantheios::log_DEBUG("obtained information for ", pantheios::integer(volumes->numVolumes), " volume(s) ...");
 
         ff::fmtln(std::cout, "Volumes [{0}]:", volumes->numVolumes);
 
