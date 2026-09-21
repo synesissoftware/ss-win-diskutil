@@ -4,11 +4,11 @@
  * Purpose: Synesis Software Disk Utility library, for Windows: version.
  *
  * Created: 2nd August 2019
- * Updated: 2nd February 2025
+ * Updated: 17th September 2026
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
- * Copyright (c) 2019-2025, Matthew Wilson and Synesis Information Systems
+ * Copyright (c) 2019-2026, Matthew Wilson and Synesis Information Systems
  * Copyright (c) 2019, Matthew Wilson and Synesis Software
  * All rights reserved.
  *
@@ -54,19 +54,24 @@
  */
 
 /** \def SS_WIN_DISKUTIL_VER_MAJOR
- * The major version number of cstring
+ * The major version number of ss-win-diskutil
  */
 
 /** \def SS_WIN_DISKUTIL_VER_MINOR
- * The minor version number of cstring
+ * The minor version number of ss-win-diskutil
  */
 
-/** \def SS_WIN_DISKUTIL_VER_REVISION
- * The revision version number of cstring
+/** \def SS_WIN_DISKUTIL_VER_PATCH
+ * The patch version number of ss-win-diskutil
+ */
+
+/** \def SS_WIN_DISKUTIL_VER_ALPHABETA
+ * The alpha/beta number of ss-win-diskutil, in the range 1-0xFE for
+ * prerelease versions, and 0xFF for a released version
  */
 
 /** \def SS_WIN_DISKUTIL_VER
- * The current composite version number of cstring
+ * The current composite version number of ss-win-diskutil
  */
 
 #ifndef SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION
@@ -78,16 +83,24 @@
 # define SS_WIN_DISKUTIL_VER_0_2_4_ALPHA2   0x00020442
 # define SS_WIN_DISKUTIL_VER_0_2_4_ALPHA3   0x00020443
 # define SS_WIN_DISKUTIL_VER_0_2_4          0x000204ff
-
-# define SS_WIN_DISKUTIL_VER                SS_WIN_DISKUTIL_VER_0_2_4_ALPHA3
-#else /* ? SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION */
-
-# define SS_WIN_DISKUTIL_VER                0x000204ff
 #endif /* !SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION */
 
 #define SS_WIN_DISKUTIL_VER_MAJOR       0
 #define SS_WIN_DISKUTIL_VER_MINOR       2
-#define SS_WIN_DISKUTIL_VER_REVISION    4
+#define SS_WIN_DISKUTIL_VER_PATCH       4
+#define SS_WIN_DISKUTIL_VER_ALPHABETA   0x43
+
+#define SS_WIN_DISKUTIL_VER \
+    (0\
+        |   (   SS_WIN_DISKUTIL_VER_MAJOR       << 24   ) \
+        |   (   SS_WIN_DISKUTIL_VER_MINOR       << 16   ) \
+        |   (   SS_WIN_DISKUTIL_VER_PATCH       <<  8   ) \
+        |   (   SS_WIN_DISKUTIL_VER_ALPHABETA   <<  0   ) \
+    )
+
+#ifndef SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION
+# define SS_WIN_DISKUTIL_VER_REVISION                       SS_WIN_DISKUTIL_VER_PATCH
+#endif /* !SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION */
 
 
 /* /////////////////////////////////////////////////////////////////////////
