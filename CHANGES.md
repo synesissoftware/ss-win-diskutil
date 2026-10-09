@@ -8,6 +8,8 @@
 * Removed the Visual Studio 2010 and 2015 solutions, projects, property sheets, and the **clcp** helper, along with the **implicit_link.h** header and its translation units, leaving CMake as the sole build system;
 * Removed the unused `wininet` link and the **STLSoft** / **xTests** links from the CMake program macros, and the now-unused `define_automated_test_program()`;
 * Changed CI to install only **Diagnosticism** and **woad**;
+* Changed `-municode` (MinGW) to apply to the `wmain()` example only, rather than to every target, which prevented linking of `main()` programs such as **test.scratch.versions**;
+* Required **woad** 0.1 or later, for the stream-conditional `WOAD_*_FOR()` macros;
 
 
 ## 0.2.5-beta1 - 9th October 2026

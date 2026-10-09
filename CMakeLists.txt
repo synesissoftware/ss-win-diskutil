@@ -64,11 +64,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
-if(MINGW)
-
-	add_link_options("-municode")
-endif(MINGW)
-
 if(MSVC)
 
 	if(MSVC_VERSION LESS 1930)
@@ -142,9 +137,13 @@ endif(BUILD_EXAMPLES)
 
 if(BUILD_EXAMPLES)
 
-	find_package(woad REQUIRED)
+	# 0.1 is the first version providing the stream-conditional macros
+	# (e.g. WOAD_FG_RED_FOR())
+	set(woad_REQUIRED_VERSION_ 0.1)
 
-	message("-- CMake package woad found (version ${woad_VERSION})")
+	find_package(woad ${woad_REQUIRED_VERSION_} REQUIRED)
+
+	message("-- CMake package woad found (version ${woad_VERSION}; ${woad_REQUIRED_VERSION_} requested)")
 endif(BUILD_EXAMPLES)
 
 
