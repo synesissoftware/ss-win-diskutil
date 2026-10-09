@@ -1,0 +1,132 @@
+name: CI cell
+
+on:
+  workflow_call:
+    inputs:
+      cell-id:
+        required: true
+        type: string
+      os:
+        required: true
+        type: string
+      c-compiler:
+        required: true
+        type: string
+      cpp-compiler:
+        required: true
+        type: string
+      build-type:
+        required: false
+        type: string
+        default: Release
+      toolchain:
+        required: false
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  # One job per cell. Sequential steps keep each kind visible in the log
+  # without a second checkout, a second MinGW setup, or an artifact
+  # round-trip. Windows runs native .cmd runners: they do not build, so they
+  # do not take the shell -M/--no-make or -v flags.
+  build-and-test:
+    name: Build and test (${{ inputs.cell-id }})
+    runs-on: ${{ inputs.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup MSYS2 MinGW
+        id: msys2
+        if: inputs.toolchain == 'mingw'
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            mingw-w64-x86_64-toolchain
+            mingw-w64-x86_64-cmake
+            mingw-w64-x86_64-make
+
+      - name: Install test dependencies (STLSoft, shwild, xTests, FastFormat, Pantheios, and Pantheios extras)
+        uses: ./.github/actions/install-sis-deps
+        with:
+          build-type: ${{ inputs.build-type }}
+          c-compiler: ${{ inputs.c-compiler }}
+          cpp-compiler: ${{ inputs.cpp-compiler }}
+          dependencies: STLSoft shwild xTests FastFormat Pantheios Pantheios.Extras.DiagUtil Pantheios.Extras.Main
+          toolchain: ${{ inputs.toolchain }}
+
+      - name: Configure
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ inputs.c-compiler }}" = "cl" ]; then
+            cmake -B build -S . \
+              -DCMAKE_DISABLE_FIND_PACKAGE_MFC=TRUE \
+              -DCMAKE_PREFIX_PATH="${{ env.SIS_DEPS }}" \
+              -DBUILD_EXAMPLES=ON \
+              -DBUILD_TESTING=ON
+          elif [ "${{ inputs.toolchain }}" = "mingw" ]; then
+            export PATH="/mingw64/bin:$PATH"
+            cmake -B build -S . -G "MinGW Makefiles" \
+              -DCMAKE_BUILD_TYPE="${{ inputs.build-type }}" \
+              -DCMAKE_C_COMPILER="${{ inputs.c-compiler }}" \
+              -DCMAKE_CXX_COMPILER="${{ inputs.cpp-compiler }}" \
+              -DCMAKE_PREFIX_PATH="${{ env.SIS_DEPS }}" \
+              -DBUILD_EXAMPLES=ON \
+              -DBUILD_TESTING=ON
+          else
+            cmake -B build -S . \
+              -DCMAKE_BUILD_TYPE="${{ inputs.build-type }}" \
+              -DCMAKE_C_COMPILER="${{ inputs.c-compiler }}" \
+              -DCMAKE_CXX_COMPILER="${{ inputs.cpp-compiler }}" \
+              -DCMAKE_PREFIX_PATH="${{ env.SIS_DEPS }}" \
+              -DBUILD_EXAMPLES=ON \
+              -DBUILD_TESTING=ON
+          fi
+
+      - name: Build
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ inputs.c-compiler }}" = "cl" ]; then
+            cmake --build build --config "${{ inputs.build-type }}" --parallel
+          elif [ "${{ inputs.toolchain }}" = "mingw" ]; then
+            export PATH="/mingw64/bin:$PATH"
+            cmake --build build --parallel 2
+          else
+            cmake --build build --parallel
+          fi
+
+      - name: Run examples
+        shell: cmd
+        run: |
+          set SIS_CMAKE_BUILD_DIR=%GITHUB_WORKSPACE%\build
+          if /I "${{ inputs.toolchain }}"=="mingw" set "PATH=${{ steps.msys2.outputs.msys2-location }}\mingw64\bin;%PATH%"
+          call run_all_examples.cmd
+
+      - name: Run unit tests
+        shell: cmd
+        run: |
+          set SIS_CMAKE_BUILD_DIR=%GITHUB_WORKSPACE%\build
+          if /I "${{ inputs.toolchain }}"=="mingw" set "PATH=${{ steps.msys2.outputs.msys2-location }}\mingw64\bin;%PATH%"
+          call run_all_unit_tests.cmd
+
+      - name: Run component tests
+        shell: cmd
+        run: |
+          set SIS_CMAKE_BUILD_DIR=%GITHUB_WORKSPACE%\build
+          if /I "${{ inputs.toolchain }}"=="mingw" set "PATH=${{ steps.msys2.outputs.msys2-location }}\mingw64\bin;%PATH%"
+          call run_all_component_tests.cmd
+
+      - name: Run scratch tests
+        continue-on-error: true
+        shell: cmd
+        run: |
+          set SIS_CMAKE_BUILD_DIR=%GITHUB_WORKSPACE%\build
+          if /I "${{ inputs.toolchain }}"=="mingw" set "PATH=${{ steps.msys2.outputs.msys2-location }}\mingw64\bin;%PATH%"
+          call run_all_scratch_tests.cmd

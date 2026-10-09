@@ -2,6 +2,8 @@
 
 **S**ynesis **S**oftware **Disk** **Util**ity library, for **Win**dows
 
+[![CI](https://github.com/synesissoftware/ss-win-diskutil/actions/workflows/ci.yml/badge.svg)](https://github.com/synesissoftware/ss-win-diskutil/actions/workflows/ci.yml)
+
 
 ## Introduction
 
