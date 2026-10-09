@@ -118,145 +118,34 @@ option(BUILD_TESTING "Build testing" ON)
 # dependencies
 #
 # required:
-# - FastFormat - required for testing;
-# - Pantheios - required for testing;
-# - Pantheios.Extras.DiagUtil - required for testing;
-# - Pantheios.Extras.Main - required for testing;
-# - STLSoft - required for testing;
-# - xTests - required for testing;
+# - <none> - the library itself has no dependencies other than the
+#   Windows API and the C standard library;
 #
-# optional:
-# - b64 - required for testing; may be needed by Pantheios;
+# optional (examples only; never part of the exported library target):
+# - Diagnosticism - provides diagnostic tracing for the examples;
+# - woad - provides stream-conditional colour for the examples;
 
 
 # ############################
-# b64
+# Diagnosticism
 
-if(BUILD_TESTING)
+if(BUILD_EXAMPLES)
 
-	find_package(b64 QUIET)
+	find_package(Diagnosticism REQUIRED)
 
-	if(b64_FOUND)
-
-		message("-- CMake package b64 found (version ${b64_VERSION})")
-
-		add_compile_definitions(HAS_b64)
-	else(b64_FOUND)
-
-		add_compile_definitions(PANTHEIOS_NO_B64)
-	endif(b64_FOUND)
-endif(BUILD_TESTING)
+	message("-- CMake package Diagnosticism found (version ${Diagnosticism_VERSION})")
+endif(BUILD_EXAMPLES)
 
 
 # ############################
-# FastFormat
+# woad
 
-if(BUILD_TESTING)
+if(BUILD_EXAMPLES)
 
-	set(FastFormat_REQUIRED_VERSION_ 0.8)
+	find_package(woad REQUIRED)
 
-	find_package(FastFormat ${FastFormat_REQUIRED_VERSION_} REQUIRED)
-
-	message("-- CMake package FastFormat found (version ${FastFormat_VERSION}; ${FastFormat_REQUIRED_VERSION_} requested)")
-endif(BUILD_TESTING)
-
-
-# ############################
-# Pantheios
-
-if(BUILD_TESTING)
-
-	set(Pantheios_REQUIRED_VERSION_ 1.0.1)
-
-	find_package(Pantheios ${Pantheios_REQUIRED_VERSION_} REQUIRED)
-
-	message("-- CMake package Pantheios found (version ${Pantheios_VERSION}; ${Pantheios_REQUIRED_VERSION_} requested)")
-endif(BUILD_TESTING)
-
-
-# ############################
-# Pantheios.Extras.DiagUtil
-
-if(BUILD_TESTING)
-
-	find_package(Pantheios.Extras.DiagUtil QUIET)
-
-	if(Pantheios.Extras.DiagUtil_FOUND)
-
-		message("-- CMake package Pantheios.Extras.DiagUtil found (version ${Pantheios.Extras.DiagUtil_VERSION})")
-
-		add_compile_definitions(HAS_Pantheios_Extras_DiagUtil)
-		add_compile_definitions(HAS_DIAGUTIL)
-	else(Pantheios.Extras.DiagUtil_FOUND)
-
-		add_compile_definitions(PANTHEIOS_NO_DIAGUTIL)
-	endif(Pantheios.Extras.DiagUtil_FOUND)
-endif(BUILD_TESTING)
-
-
-# ############################
-# Pantheios.Extras.Main
-
-if(BUILD_TESTING)
-
-	set(Pantheios.Extras.Main_REQUIRED_VERSION_ 0.2)
-
-	find_package(Pantheios.Extras.Main ${Pantheios.Extras.Main_REQUIRED_VERSION_} REQUIRED)
-
-	message("-- CMake package Pantheios.Extras.Main found (version ${Pantheios.Extras.Main_VERSION}; ${Pantheios.Extras.Main_REQUIRED_VERSION_} requested)")
-endif(BUILD_TESTING)
-
-
-# ############################
-# STLSoft
-#
-# We provide flexibility here, as in:
-# 1. if a CMake variable STLSOFT is provided then it is used; otherwise
-# 2. if an environment variable STLSOFT is provided then it then it is used;
-#    otherwise
-# 3. if the package STLSoft (via find_package()) is found then it is used;
-#    otherwise
-# 4. we abort
-
-if(BUILD_TESTING OR BUILD_EXAMPLES)
-
-	if(DEFINED STLSOFT)
-
-		message("-- STLSOFT provided as CMake variable with value '${STLSOFT}'")
-
-		set(STLSOFT_INCLUDE_DIR ${STLSOFT}/include)
-	elseif(DEFINED ENV{STLSOFT})
-
-		message("-- STLSOFT provided as environment variable with value '$ENV{STLSOFT}'")
-
-		set(STLSOFT_INCLUDE_DIR $ENV{STLSOFT}/include)
-	else()
-
-		set(STLSoft_REQUIRED_VERSION_ 1.11)
-
-		find_package(STLSoft ${STLSoft_REQUIRED_VERSION_} REQUIRED)
-
-		message("-- CMake package STLSoft found (version ${STLSoft_VERSION}; ${STLSoft_REQUIRED_VERSION_} requested)")
-	endif()
-
-	if(DEFINED STLSOFT_INCLUDE_DIR)
-
-		include_directories(${STLSOFT_INCLUDE_DIR})
-	endif()
-endif(BUILD_TESTING OR BUILD_EXAMPLES)
-
-
-# ############################
-# xTests
-
-if(BUILD_TESTING)
-
-	set(xTests_REQUIRED_VERSION_ 0.26)
-
-	find_package(xTests ${xTests_REQUIRED_VERSION_} REQUIRED)
-
-	message("-- CMake package xTests found (version ${xTests_VERSION}; ${xTests_REQUIRED_VERSION_} requested)")
-endif(BUILD_TESTING)
+	message("-- CMake package woad found (version ${woad_VERSION})")
+endif(BUILD_EXAMPLES)
 
 
 # ################################################

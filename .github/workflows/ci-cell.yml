@@ -51,13 +51,13 @@ jobs:
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-make
 
-      - name: Install test dependencies (STLSoft, shwild, xTests, FastFormat, Pantheios, and Pantheios extras)
+      - name: Install example dependencies (Diagnosticism and woad)
         uses: ./.github/actions/install-sis-deps
         with:
           build-type: ${{ inputs.build-type }}
           c-compiler: ${{ inputs.c-compiler }}
           cpp-compiler: ${{ inputs.cpp-compiler }}
-          dependencies: STLSoft shwild xTests FastFormat Pantheios Pantheios.Extras.DiagUtil Pantheios.Extras.Main
+          dependencies: Diagnosticism woad
           toolchain: ${{ inputs.toolchain }}
 
       - name: Configure
