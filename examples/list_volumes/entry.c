@@ -1,11 +1,15 @@
 
 #include <ss-win-diskutil.h>
 
+#include <diagnosticism/tracing.h>
+#include <woad/woad.h>
+
 #include <windows.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <wchar.h>
 
 
 static
@@ -21,11 +25,23 @@ basename(
     wchar_t const*  path
 );
 
+/* Writes a narrow, ASCII-only string (such as a woad SGR sequence, which
+ * is empty when colour is not warranted for the stream) to a stream that
+ * is otherwise used with wide-character functions.
+ */
+static
+void
+put_sequence(
+    FILE*           stm
+,   char const*     seq
+);
+
 int wmain(int argc, wchar_t* argv[])
 {
     int                     i;
     int                     showLabels  =   0;
     int                     showSpaces  =   0;
+    int                     verbose     =   0;
     wchar_t const* const    bn          =   basename(argv[0]);
 
     SSWinDiskUtil_VolumeDescriptions_t  volumes;
@@ -48,19 +64,34 @@ int wmain(int argc, wchar_t* argv[])
         {
             showSpaces = 1;
         }
+        else if(0 == wcscmp(L"--verbose", arg))
+        {
+            verbose = 1;
+        }
         else
         {
-            fwprintf(stderr, L"%s: unrecognised argument '%s'; use --help for usage\n", bn, arg);
+            put_sequence(stderr, WOAD_FG_RED_FOR(stderr));
+            fwprintf(stderr, L"%s: unrecognised argument '%s'; use --help for usage", bn, arg);
+            put_sequence(stderr, WOAD_RESET_FOR(stderr));
+            fputwc(L'\n', stderr);
 
             return EXIT_FAILURE;
         }
+    }
+
+    if (verbose)
+    {
+        diagnosticism_trace(stderr, "loading volumes ...");
     }
 
     if (0 == SSWinDiskUtil_LoadVolumes(NULL, 0, &volumes))
     {
         LONG const le = GetLastError();
 
-        fwprintf(stderr, L"%s: failed to load volumes: %d\n", bn, le);
+        put_sequence(stderr, WOAD_FG_RED_FOR(stderr));
+        fwprintf(stderr, L"%s: failed to load volumes: %d", bn, le);
+        put_sequence(stderr, WOAD_RESET_FOR(stderr));
+        fputwc(L'\n', stderr);
 
         return EXIT_FAILURE;
     }
@@ -68,65 +99,52 @@ int wmain(int argc, wchar_t* argv[])
     {
         size_t j;
 
+        if (verbose)
+        {
+            diagnosticism_trace(stderr, "obtained information for %lu volume(s)", (unsigned long)volumes->numVolumes);
+        }
+
         fwprintf(stdout, L"%I64u volume(s):\n", volumes->numVolumes);
 
         for (j = 0; volumes->numVolumes != j; ++j)
         {
             SSWinDiskUtil_VolumeDescriptor_t const* const volume = &volumes->volumes[j];
 
+            fwprintf(stdout, L"%lu: %ls", (unsigned int)j, (showLabels || showSpaces) ? L"id=" : L"");
+
+            put_sequence(stdout, WOAD_FG_CYAN_FOR(stdout));
+            fwprintf(stdout, L"%.*s", (int)volume->id.len, volume->id.ptr);
+            put_sequence(stdout, WOAD_RESET_FOR(stdout));
+
             if (showLabels)
             {
-                if (showSpaces)
-                {
-                    fwprintf(
-                        stdout
-                    ,   L"%lu: id=%.*s label=\"%.*s\" free=%I64u capacity=%I64u\n"
-                    ,   (unsigned int)j
-                    ,   (int)volume->id.len, volume->id.ptr
-                    ,   (int)volume->friendlyName.len, volume->friendlyName.ptr
-                    ,   volume->callerFreeBytes
-                    ,   volume->capacityBytes
-                    );
-                }
-                else
-                {
-                    fwprintf(
-                        stdout
-                    ,   L"%lu: id=%.*s label=\"%.*s\"\n"
-                    ,   (unsigned int)j
-                    ,   (int)volume->id.len, volume->id.ptr
-                    ,   (int)volume->friendlyName.len, volume->friendlyName.ptr
-                    );
-                }
+                fwprintf(stdout, L" label=\"%.*s\"", (int)volume->friendlyName.len, volume->friendlyName.ptr);
             }
-            else
+
+            if (showSpaces)
             {
-                if (showSpaces)
-                {
-                    fwprintf(
-                        stdout
-                    ,   L"%lu: id=%.*s free=%I64u capacity=%I64u\n"
-                    ,   (unsigned int)j
-                    ,   (int)volume->id.len, volume->id.ptr
-                    ,   volume->callerFreeBytes
-                    ,   volume->capacityBytes
-                    );
-                }
-                else
-                {
-                    fwprintf(
-                        stdout
-                    ,   L"%lu: %.*s\n"
-                    ,   (unsigned int)j
-                    ,   (int)volume->id.len, volume->id.ptr
-                    );
-                }
+                fwprintf(stdout, L" free=%I64u capacity=%I64u", volume->callerFreeBytes, volume->capacityBytes);
             }
+
+            fputwc(L'\n', stdout);
         }
 
         SSWinDiskUtil_ReleaseVolumes(NULL, volumes);
 
         return EXIT_SUCCESS;
+    }
+}
+
+static
+void
+put_sequence(
+    FILE*           stm
+,   char const*     seq
+)
+{
+    for (; '\0' != *seq; ++seq)
+    {
+        fputwc((wchar_t)(unsigned char)*seq, stm);
     }
 }
 
@@ -177,7 +195,7 @@ show_usage(
 ,   wchar_t const*  bn
 )
 {
-    fwprintf(stm, L"USAGE: %s { --help | [ --label ] [ --spaces ] }\n", bn);
+    fwprintf(stm, L"USAGE: %s { --help | [ --label ] [ --spaces ] [ --verbose ] }\n", bn);
 }
 
 

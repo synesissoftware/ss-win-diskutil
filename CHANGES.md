@@ -1,6 +1,17 @@
 # ss-win-diskutil - Changes <!-- omit in toc -->
 
 
+## 0.2.6 - 11th October 2026
+
+* Removed the **FastFormat**, **Pantheios**, **Pantheios.Extras.DiagUtil**, **Pantheios.Extras.Main**, **STLSoft**, **shwild**, **xTests**, and **b64** build dependencies;
+* Removed the **test/scratch/list_drives** program, folding its `--verbose` diagnostics into **examples/list_volumes**, which now uses **Diagnosticism** (`diagnosticism_trace()`) and **woad** (stream-conditional colour) - for the examples only, never the library target;
+* Removed the Visual Studio 2010 and 2015 solutions, projects, property sheets, and the **clcp** helper, along with the **implicit_link.h** header and its translation units, leaving CMake as the sole build system;
+* Removed the unused `wininet` link and the **STLSoft** / **xTests** links from the CMake program macros, and the now-unused `define_automated_test_program()`;
+* Changed CI to install only **Diagnosticism** and **woad**;
+* Changed `-municode` (MinGW) to apply to the `wmain()` example only, rather than to every target, which prevented linking of `main()` programs such as **test.scratch.versions**;
+* Required **woad** 0.1 or later, for the stream-conditional `WOAD_*_FOR()` macros;
+
+
 ## 0.2.5-beta1 - 9th October 2026
 
 * Added the full SisClr CMake helper corpus, including native Windows runners and separate unit, component, example, performance, and scratch test categories;
