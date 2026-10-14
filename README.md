@@ -2,6 +2,8 @@
 
 **S**ynesis **S**oftware **Disk** **Util**ity library, for **Win**dows
 
+[![CI](https://github.com/synesissoftware/ss-win-diskutil/actions/workflows/ci.yml/badge.svg)](https://github.com/synesissoftware/ss-win-diskutil/actions/workflows/ci.yml)
+
 
 ## Introduction
 
@@ -19,6 +21,9 @@ It has **no dependencies** on any other non-standard library.
 - [Project Information](#project-information)
   - [Where to get help](#where-to-get-help)
   - [Contribution guidelines](#contribution-guidelines)
+  - [Dependencies](#dependencies)
+    - [Efferent (fan-out)](#efferent-fan-out)
+    - [Development Dependencies](#development-dependencies)
   - [License](#license)
 
 
@@ -183,6 +188,19 @@ which gives results such as
 ### Contribution guidelines
 
 Defect reports, feature requests, and pull requests are welcome on https://github.com/synesissoftware/ss-win-diskutil.
+
+
+### Dependencies
+
+#### Efferent (fan-out)
+
+None, beyond the Windows API and the C standard library.
+
+
+#### Development Dependencies
+
+* [**CMake**](https://cmake.org/) 3.20 or later;
+* for building the examples only, [**Diagnosticism**](https://github.com/synesissoftware/Diagnosticism) (diagnostic tracing, via `--verbose`) and [**woad**](https://github.com/synesissoftware/woad) (stream-conditional colour); neither is linked into, nor required by, the **ss-win-diskutil** library;
 
 
 ### License
