@@ -1,7 +1,7 @@
 # ss-win-diskutil - Changes <!-- omit in toc -->
 
 
-## 0.2.6 - 11th October 2026
+## 0.2.6 - 15th October 2026
 
 * Removed the **FastFormat**, **Pantheios**, **Pantheios.Extras.DiagUtil**, **Pantheios.Extras.Main**, **STLSoft**, **shwild**, **xTests**, and **b64** build dependencies;
 * Removed the **test/scratch/list_drives** program, folding its `--verbose` diagnostics into **examples/list_volumes**, which now uses **Diagnosticism** (`diagnosticism_trace()`) and **woad** (stream-conditional colour) - for the examples only, never the library target;

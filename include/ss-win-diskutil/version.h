@@ -4,7 +4,7 @@
  * Purpose: Synesis Software Disk Utility library, for Windows: version.
  *
  * Created: 2nd August 2019
- * Updated: 11th October 2026
+ * Updated: 15th October 2026
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
