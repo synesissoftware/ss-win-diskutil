@@ -14,9 +14,6 @@ if(WIN32)
 
 		add_definitions(-DWIN32)
 	endif()
-
-	# suppress implicit-link file
-	add_definitions(-DSS_WIN_DISKUTIL_h_implicit_link)
 endif(WIN32)
 
 
