@@ -4,7 +4,7 @@
  * Purpose: Synesis Software Disk Utility library, for Windows: version.
  *
  * Created: 2nd August 2019
- * Updated: 15th October 2026
+ * Updated: 20th October 2026
  *
  * Home:    http://github.com/synesissoftware/ss-win-diskutil
  *
@@ -65,8 +65,8 @@
  * The patch version number of ss-win-diskutil
  */
 
-/** \def SS_WIN_DISKUTIL_VER_ALPHABETA
- * The alpha/beta number of ss-win-diskutil, in the range 1-0xFE for
+/** \def SS_WIN_DISKUTIL_VER_RELSTATUS
+ * The release-status number of ss-win-diskutil, in the range 1-0xFE for
  * prerelease versions, and 0xFF for a released version
  */
 
@@ -90,17 +90,18 @@
 #define SS_WIN_DISKUTIL_VER_MAJOR       0
 #define SS_WIN_DISKUTIL_VER_MINOR       2
 #define SS_WIN_DISKUTIL_VER_PATCH       6
-#define SS_WIN_DISKUTIL_VER_ALPHABETA   0xFF
+#define SS_WIN_DISKUTIL_VER_RELSTATUS   0xFF
 
 #define SS_WIN_DISKUTIL_VER \
     (0\
         |   (   SS_WIN_DISKUTIL_VER_MAJOR       << 24   ) \
         |   (   SS_WIN_DISKUTIL_VER_MINOR       << 16   ) \
         |   (   SS_WIN_DISKUTIL_VER_PATCH       <<  8   ) \
-        |   (   SS_WIN_DISKUTIL_VER_ALPHABETA   <<  0   ) \
+        |   (   SS_WIN_DISKUTIL_VER_RELSTATUS   <<  0   ) \
     )
 
 #ifndef SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION
+# define SS_WIN_DISKUTIL_VER_ALPHABETA                      SS_WIN_DISKUTIL_VER_RELSTATUS
 # define SS_WIN_DISKUTIL_VER_REVISION                       SS_WIN_DISKUTIL_VER_PATCH
 #endif /* !SS_WIN_DISKUTIL_DOCUMENTATION_SKIP_SECTION */
 
