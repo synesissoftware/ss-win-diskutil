@@ -1,6 +1,13 @@
 # ss-win-diskutil - Changes <!-- omit in toc -->
 
 
+## 0.2.7 - 20th October 2026
+
+* Made `SS_WIN_DISKUTIL_VER_RELSTATUS` the primary low-byte version macro, retaining `SS_WIN_DISKUTIL_VER_ALPHABETA` as a documentation-hidden alias in **include/ss-win-diskutil/version.h**;
+* Aligned the **run_all_examples**, **run_all_scratch_tests**, and **run_all_unit_tests** helper scripts (including **.cmd** counterparts) with **misc-dev-scripts** gold tip **0754c23**, excluding **CMakeFiles** and `*.d` / `*.o` / `*.obj` from discovery and adding scratch `--skip-interactive`;
+* Added `SS_WIN_DISKUTIL_VER_0_2_7`;
+
+
 ## 0.2.6 - 15th October 2026
 
 * Removed the **FastFormat**, **Pantheios**, **Pantheios.Extras.DiagUtil**, **Pantheios.Extras.Main**, **STLSoft**, **shwild**, **xTests**, and **b64** build dependencies;
