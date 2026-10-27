@@ -5,7 +5,7 @@
 # Purpose:  Top-level CMake lists file for ss-win-diskutil
 #
 # Created:  10th July 2024
-# Updated:  9th October 2026
+# Updated:  27th October 2026
 #
 # ######################################################################## #
 
@@ -129,6 +129,11 @@ if(BUILD_EXAMPLES)
 	find_package(Diagnosticism REQUIRED)
 
 	message("-- CMake package Diagnosticism found (version ${Diagnosticism_VERSION})")
+
+	add_compile_definitions(
+		HAS_Diagnosticism
+		HAS_DIAGNOSTICISM
+	)
 endif(BUILD_EXAMPLES)
 
 
@@ -144,6 +149,11 @@ if(BUILD_EXAMPLES)
 	find_package(woad ${woad_REQUIRED_VERSION_} REQUIRED)
 
 	message("-- CMake package woad found (version ${woad_VERSION}; ${woad_REQUIRED_VERSION_} requested)")
+
+	add_compile_definitions(
+		HAS_woad
+		HAS_WOAD
+	)
 endif(BUILD_EXAMPLES)
 
 
