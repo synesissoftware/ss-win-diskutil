@@ -1,6 +1,12 @@
 # ss-win-diskutil - Changes <!-- omit in toc -->
 
 
+## 0.2.8 - 27th October 2026
+
+* Defined `HAS_Diagnosticism` / `HAS_DIAGNOSTICISM` and `HAS_woad` / `HAS_WOAD` when those example dependencies are detected;
+* Added `SS_WIN_DISKUTIL_VER_0_2_8`;
+
+
 ## 0.2.7 - 20th October 2026
 
 * Made `SS_WIN_DISKUTIL_VER_RELSTATUS` the primary low-byte version macro, retaining `SS_WIN_DISKUTIL_VER_ALPHABETA` as a documentation-hidden alias in **include/ss-win-diskutil/version.h**;

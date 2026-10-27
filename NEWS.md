@@ -3,6 +3,7 @@
 
 | Date                  | News Item                                                                 | Details |
 | --------------------- | ------------------------------------------------------------------------- | ------- |
+| 27th October 2026     | [**ss-win-diskutil** 0.2.8 released](https://github.com/synesissoftware/ss-win-diskutil/releases/tag/0.2.8) | `HAS_Diagnosticism` / `HAS_woad` for the examples |
 | 20th October 2026     | [**ss-win-diskutil** 0.2.7 released](https://github.com/synesissoftware/ss-win-diskutil/releases/tag/0.2.7) | `SS_WIN_DISKUTIL_VER_RELSTATUS`; gold tip helpers |
 | 15th October 2026     | [**ss-win-diskutil** 0.2.6 released](https://github.com/synesissoftware/ss-win-diskutil/releases/tag/0.2.6) | Removal of heavy dependencies and Visual Studio artefacts |
 | 9th October 2026      | [**ss-win-diskutil** 0.2.5-beta1 released](https://github.com/synesissoftware/ss-win-diskutil/releases/tag/0.2.5-beta1) | Windows CI, CMake helpers, version reporter, and boilerplate modernisation |
